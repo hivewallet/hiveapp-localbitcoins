@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>       
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" /> 
+	<link href="css/app.css" rel="stylesheet" type="text/css">
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+  </head>
+  <body>
+	<div id="loading-page" class="page">
+		<img src="images/loading.gif" />
+	</div>
+		<div id="header">
+			<div><button>menu</button></div>
+			<div><img src="images/logo.png" /></div>
+			<div><button id="login-btn">login</button></div>
+		</div>
+		<div id="page-content">
+			
+			<div id="user-page" class="page">				
+				<div class="list-continer">
+					<table class="table table-striped">
+						<tr>
+							<th width="25%">visible</th>
+							<th width="25%">Price</th>
+							<th width="25%">Limits</th>
+							<th width="25%">&nbsp;</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<div id="login-page" class="page">				
+				<div id="login-form">
+					<div class="home-title">To log in enter your</div>
+					<div><input id="login-name" placeholder="username / email" type="text" /></div>
+					<div><input id="login-password" placeholder="password" type="password" /></div>
+				<div><button id="auth-btn">login</button></div>	
+				</div>
+			</div>
+			
+			<div id="main-page" class="page">
+			
+				<div class="home-title">Buy and sell bitcoins</div>
+				<div id="home-subtitle">3248 cities <span>in</span> 180 countries</div>
+				<div id="search" class="center-content">
+					<div>
+						<div>
+						<input name="whattodo" type="radio" value="0" checked="checked"/> I want to buy bitcoins
+						</div>
+						<div>
+						<input name="whattodo" type="radio" value="1" /> I want to sell bitcoins
+						</div>
+					</div>
+					<div><input name="search-country" type="text" /></div>
+					<div>
+						<select>
+							<optgroup id="paymend-method" label="Online">
+								<option value="">All online offers</option>
+							</optgroup>
+						</select>
+					</div>
+					<div><button id="search-btn">find offers</button></div>			
+				</div>			
+			
+				<div id="search-result">
+					<div id="search-result-sell" class="continer-section">
+						<div class="home-title">Results for sell bitcoins online</div>
+						<div id="result-sell-bitcoins" class="list-continer">
+							<table class="table table-striped">
+								<tr>
+									<th width="50%">Seller</th>
+									<th width="25%">Price</th>
+									<th width="25%">&nbsp;</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div id="search-result-buy" class="continer-section">
+						<div class="home-title">Results for buy bitcoins online</div>
+						<div id="result-buy-bitcoins" class="list-continer">
+							<table class="table table-striped">
+								<tr>
+									<th width="50%">Seller</th>
+									<th width="25%">Price</th>
+									<th width="25%">&nbsp;</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			
+				<div id="main-result">
+				
+					<div class="continer-section">
+						<div class="home-title">Buy bitcoins online in <span class="fill-country"></span></div>
+						<div id="buy-bitcoins" class="short-list list-continer">
+							<table class="table table-striped">
+								<tr>
+									<th width="50%">Seller</th>
+									<th width="25%">Price</th>
+									<th width="25%">&nbsp;</th>
+								</tr>
+							</table>
+						</div>
+						<div>
+							<button class="more-btn">more offers</button>
+						</div>
+					</div>
+					<div class="continer-section">
+						<div class="home-title">Buy bitcoins with cash near You</div>
+						<div id="buy-cash-near" class="short-list list-continer">
+							<table class="table table-striped">
+								<tr>
+									<th width="50%">Seller</th>
+									<th width="25%">Price</th>
+									<th width="25%">&nbsp;</th>
+								</tr>
+							</table>
+						</div>
+						<div>
+							<button class="more-btn">more offers</button>
+						</div>
+					</div>
+					<div class="continer-section">
+						<div class="home-title">Sell bitcoins online in <span class="fill-country"></span></div>
+						<div id="sell-bitcoins" class="short-list list-continer">
+							<table class="table table-striped">
+								<tr>
+									<th width="50%">Seller</th>
+									<th width="25%">Price</th>
+									<th width="25%">&nbsp;</th>
+								</tr>
+							</table>
+						</div>
+						<div>
+							<button class="more-btn">more offers</button>
+						</div>
+					</div>
+					<div class="continer-section">
+						<div class="home-title">Buy bitcoins with cash near You</div>
+						<div id="sell-cash-near" class="short-list list-continer">
+							<table class="table table-striped">
+								<tr>
+									<th width="50%">Seller</th>
+									<th width="25%">Price</th>
+									<th width="25%">&nbsp;</th>
+								</tr>
+							</table>
+						</div>
+						<div>
+							<button class="more-btn">more offers</button>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+  </body>
+</html>
