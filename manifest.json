@@ -1,8 +1,8 @@
 {
-  "name": "Cointagion",
-  "id": "cointagion",
-  "version": "0.1",
-  "author": "",
-  "description": "Cointagion Hive client",
+  "name": "Localbitcoins",
+  "id": "localbitcoins",
+  "version": "0.9",
+  "author": "Recoded.co",
+  "description": "Localbitcoins Hive App",
   "icon": "icon.png"
 }

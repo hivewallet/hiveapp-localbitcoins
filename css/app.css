@@ -4,6 +4,33 @@
 	padding:0px;
 }
 
+#defaults-graph
+{
+	width:300px;
+	height: 250px;
+	text-align:center;
+	padding-bottom: 1px;
+    padding-top: 5px;
+	margin: 30px auto 50px auto;
+}
+
+#search-country
+{
+	text-transform:capitalize;
+}
+
+#defaults-graph .label
+{
+	background:none;
+	color:#000;
+}
+
+#home-btn
+{
+	background:none;
+	outline:none;
+}
+
 #header
 {
 	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
@@ -28,17 +55,23 @@
 	width:25%;
 }
 
+
+
 #header > div:last-child
 {
 	width:25%;
 }
 
-#home-subtitle
+#home-subtitle,.rtp-title
 {
 	font-size:17px;
 	text-align:center;
-	color:#1c6ebf;
 	margin-bottom:20px;
+}
+
+#home-subtitle,.rtp-title span
+{
+	color:#1c6ebf;
 }
 
 #home-subtitle span
@@ -60,6 +93,11 @@
 	margin:10px;
 }
 
+#search input[type="radio"]
+{
+	margin:0;
+}
+
 #loading-page
 {
 	width:100%;
@@ -69,13 +107,14 @@
 	display:none;
 }
 
+#login-form .home-title
+{
+	padding: 10px 0px;
+}
+
 #loading-page img
-{	
-	width:20%;
-	height:20%;
-	position:fixed;
-	top:40%;
-	left:40%;
+{		
+	margin:250px auto 0 auto;
 }
 
 #page-content
@@ -83,7 +122,7 @@
 	padding: 10px;
 }
 
-#search-result > div,.page
+#search-result > div,.page,.less-btn
 {
 	display:none;
 }
@@ -93,6 +132,11 @@
 	border-radius:5px;
 	padding: 4px 10px;
 	color:#fff;
+}
+
+#login-page .rtp-title
+{
+	padding:10px;
 }
 
 #search input[type="text"],#login-page input[type="text"],#login-page input[type="password"]
@@ -150,15 +194,16 @@
 	font-weight:bold;
 }
 
-.list-continer button,.continer-section > div:last-child > button,#search button,#login-btn,#auth-btn
+.list-continer button,.continer-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn,#home-btn
 {
 	font-weight:bold;
 	color:#fff;	
 	border:none;	
 	border-radius:3px;
+	margin:5px;
 }
 
-.list-continer button,#search button,#auth-btn
+.list-continer button,#search button,#auth-btn,#exchange-btn
 {
 	background-color:#1c6ebf;
 }
@@ -168,7 +213,29 @@
 	background-color:#f58220;
 }
 
-.list-continer button,.continer-section > div:last-child > button,#search button,#login-btn,#auth-btn
+.list-continer button:hover,#search button:hover,#auth-btn,#exchange-btn:hover
+{
+	background-color:#165da3;
+}
+
+.continer-section > div:last-child > button:hover,#login-btn:hover
+{
+	background-color:#d26a20;
+}
+
+
+.list-continer button,.continer-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn
 {
 	padding:3px 30px;
+}
+
+#exchange-page > div
+{
+	text-align:center;
+}
+
+.alert
+{
+	display:none;
+	text-align:center;
 }

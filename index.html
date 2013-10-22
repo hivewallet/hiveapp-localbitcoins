@@ -4,158 +4,349 @@
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" /> 
 	<link href="css/app.css" rel="stylesheet" type="text/css">
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-    <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+	<script type="text/javascript" src="js/raphael.js"></script>
+    <script type="text/javascript" src="js/jquery.enumerable.js"></script>
+    <script type="text/javascript" src="js/jquery.tufte-graph.js"></script>
     <script src="js/app.js" type="text/javascript"></script>
   </head>
   <body>
 	<div id="loading-page" class="page">
 		<img src="images/loading.gif" />
 	</div>
-		<div id="header">
-			<div><button>menu</button></div>
-			<div><img src="images/logo.png" /></div>
-			<div><button id="login-btn">login</button></div>
-		</div>
-		<div id="page-content">
-			
-			<div id="user-page" class="page">				
-				<div class="list-continer">
-					<table class="table table-striped">
-						<tr>
-							<th width="25%">visible</th>
-							<th width="25%">Price</th>
-							<th width="25%">Limits</th>
-							<th width="25%">&nbsp;</th>
-						</tr>
-					</table>
-				</div>
-			</div>
-			
-			<div id="login-page" class="page">				
-				<div id="login-form">
-					<div class="home-title">To log in enter your</div>
-					<div><input id="login-name" placeholder="username / email" type="text" /></div>
-					<div><input id="login-password" placeholder="password" type="password" /></div>
-				<div><button id="auth-btn">login</button></div>	
-				</div>
-			</div>
-			
-			<div id="main-page" class="page">
-			
-				<div class="home-title">Buy and sell bitcoins</div>
-				<div id="home-subtitle">3248 cities <span>in</span> 180 countries</div>
-				<div id="search" class="center-content">
-					<div>
-						<div>
-						<input name="whattodo" type="radio" value="0" checked="checked"/> I want to buy bitcoins
-						</div>
-						<div>
-						<input name="whattodo" type="radio" value="1" /> I want to sell bitcoins
-						</div>
-					</div>
-					<div><input name="search-country" type="text" /></div>
-					<div>
-						<select>
-							<optgroup id="paymend-method" label="Online">
-								<option value="">All online offers</option>
-							</optgroup>
-						</select>
-					</div>
-					<div><button id="search-btn">find offers</button></div>			
-				</div>			
-			
-				<div id="search-result">
-					<div id="search-result-sell" class="continer-section">
-						<div class="home-title">Results for sell bitcoins online</div>
-						<div id="result-sell-bitcoins" class="list-continer">
-							<table class="table table-striped">
-								<tr>
-									<th width="50%">Seller</th>
-									<th width="25%">Price</th>
-									<th width="25%">&nbsp;</th>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div id="search-result-buy" class="continer-section">
-						<div class="home-title">Results for buy bitcoins online</div>
-						<div id="result-buy-bitcoins" class="list-continer">
-							<table class="table table-striped">
-								<tr>
-									<th width="50%">Seller</th>
-									<th width="25%">Price</th>
-									<th width="25%">&nbsp;</th>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-			
-				<div id="main-result">
-				
-					<div class="continer-section">
-						<div class="home-title">Buy bitcoins online in <span class="fill-country"></span></div>
-						<div id="buy-bitcoins" class="short-list list-continer">
-							<table class="table table-striped">
-								<tr>
-									<th width="50%">Seller</th>
-									<th width="25%">Price</th>
-									<th width="25%">&nbsp;</th>
-								</tr>
-							</table>
-						</div>
-						<div>
-							<button class="more-btn">more offers</button>
-						</div>
-					</div>
-					<div class="continer-section">
-						<div class="home-title">Buy bitcoins with cash near You</div>
-						<div id="buy-cash-near" class="short-list list-continer">
-							<table class="table table-striped">
-								<tr>
-									<th width="50%">Seller</th>
-									<th width="25%">Price</th>
-									<th width="25%">&nbsp;</th>
-								</tr>
-							</table>
-						</div>
-						<div>
-							<button class="more-btn">more offers</button>
-						</div>
-					</div>
-					<div class="continer-section">
-						<div class="home-title">Sell bitcoins online in <span class="fill-country"></span></div>
-						<div id="sell-bitcoins" class="short-list list-continer">
-							<table class="table table-striped">
-								<tr>
-									<th width="50%">Seller</th>
-									<th width="25%">Price</th>
-									<th width="25%">&nbsp;</th>
-								</tr>
-							</table>
-						</div>
-						<div>
-							<button class="more-btn">more offers</button>
-						</div>
-					</div>
-					<div class="continer-section">
-						<div class="home-title">Buy bitcoins with cash near You</div>
-						<div id="sell-cash-near" class="short-list list-continer">
-							<table class="table table-striped">
-								<tr>
-									<th width="50%">Seller</th>
-									<th width="25%">Price</th>
-									<th width="25%">&nbsp;</th>
-								</tr>
-							</table>
-						</div>
-						<div>
-							<button class="more-btn">more offers</button>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
+    <div id="header">
+        <div><button id="exchange-btn">rates</button></div>
+        <div><button  id="home-btn"><img src="images/logo.png" /></button></div>
+        <div><button id="login-btn">login</button></div>
+    </div>
+		
+    <div id="page-content">
+        <div id="info-user-detalis" class="page">
+            <div class="home-title"><span id="uid-un"></span> profile</div>
+            <div class="list-continer">
+                <table class="table table-striped">
+                    <tr>
+                        <td width="40%">Trading partners count</td>
+                        <td id="uid-tpc" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Feedbacks unconfirmed count</td>
+                        <td id="uid-fuc" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Trade volume text</td>
+                        <td id="uid-tvt" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Blocked count</td>
+                        <td id="uid-tbc" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Feedback count</td>
+                        <td id="uid-fc" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Trusted count</td>
+                        <td id="uid-tc" width="60%"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="edit-info-page" class="page">
+            <div class="home-title">Edit your ad</div>
+            <div id="edit-info-error" class="alert alert-danger">...</div>
+            <div id="edit-info-success" class="alert alert-success">...</div>
+            <div class="list-continer">
+                <table class="table table-striped">
+                    <tr>
+                        <td width="40%">Visible</td>
+                        <td width="60%">
+                            <select id="edit-info-visible">
+                                <option value="false">false</option>
+                                <option value="true">true</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Price</td>
+                        <td id="edit-info-price" width="60%"></span></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Payment method</td>
+                        <td id="edit-info-payment" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">User</td>
+                        <td id="edit-info-user" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Trade min</td>
+                        <td width="60%"><input id="edit-info-min" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Trade max</td>
+                        <td width="60%"><input id="edit-info-max" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Location</td>
+                        <td id="edit-info-location" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Price equation</td>
+                        <td width="60%"><input id="edit-info-equation" type="text" /></td>
+                    </tr>
+                </table>
+                <div>
+                    <button id="" class="save-info-btn">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="info-page" class="page">
+            <div class="home-title">Buy and sell bitcoins near you</div>
+            <div class="rtp-title">From LocalBitcoins.com user <span id="info-user-short">SamBrannan49</span></div>
+            <div class="list-continer">
+                <table class="table table-striped">
+                    <tr>
+                        <td width="40%">Price</td>
+                        <td id="info-price" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Payment method</td>
+                        <td id="info-payment" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">User</td>
+                        <td id="info-user" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Trade limits</td>
+                        <td id="info-limits" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Location</td>
+                        <td id="info-location" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Price equation</td>
+                        <td id="info-info-equation" width="60%"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="exchange-page" class="page">
+            <div class="home-title">Bitcoins exchange rates</div>
+            <div><select id="exchcenge-select"></select></div>
+            <div id='defaults-graph' class='graph'></div>
+            <div>Rates (last): <span id='rates-last'></span></div>
+            <div>Volume BTC: <span id='volume-btc'></span></div>
+
+            <div class="continer-section">
+                <div class="home-title">Trades</div>
+                <div id="trades-continer" class="short-list list-continer">
+                    <table class="table table-striped">
+                        <tr>
+                            <th width="25%">Amount</th>
+                            <th width="25%">Price</th>
+                            <th width="50%">Date</th>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <button class="more-btn">more offers</button>
+                    <button class="less-btn">less offers</button>
+                </div>
+            </div>
+
+        </div>
+        <div id="user-page" class="page">
+            <div class="home-title">Your profile</div>
+            <div class="list-continer">
+                <table class="table table-striped">
+                    <tr>
+                        <td width="40%">Trading partners count</td>
+                        <td id="myself-tpc" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Feedbacks unconfirmed count</td>
+                        <td id="myself-fuc" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Trade volume text</td>
+                        <td id="myself-tvt" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Blocked count</td>
+                        <td id="myself-tbc" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Feedback count</td>
+                        <td id="myself-fc" width="60%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Trusted count</td>
+                        <td id="myself-tc" width="60%"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="home-title">Your ads</div>
+            <div id="user-ads-continer" class="list-continer">
+                <table class="table table-striped">
+                    <tr>
+                        <th width="25%">Visible</th>
+                        <th width="25%">Price</th>
+                        <th width="25%">Limits</th>
+                        <th width="25%">&nbsp;</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="home-title">Escrows</div>
+                <div id="user-escrow-continer" class="list-continer">
+                <table class="table table-striped">
+                    <tr>
+                        <th width="20%">Buyer</th>
+                        <th width="20%">Amount</th>
+                        <th width="20%">Amount btc</th>
+                        <th width="20%">Updated</th>
+                        <th width="20%">&nbsp;</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="login-page" class="page">
+            <div class="home-title">Welcome back!</div>
+            <div class="rtp-title">We have offers from <span>3248 cities</span> in <span>180 countries</span></div>
+            <div id="login-form">
+                <div class="home-title">To log in enter your</div>
+                <div id="login-error" class="alert alert-danger">...</div>
+                <div><input id="login-name" placeholder="username / email" type="text" /></div>
+                <div><input id="login-password" placeholder="password" type="password" /></div>
+            <div><button id="auth-btn">login</button></div>
+            </div>
+        </div>
+
+        <div id="main-page" class="page">
+
+            <div class="home-title">Buy and sell bitcoins</div>
+            <div id="home-subtitle">3248 cities <span>in</span> 180 countries</div>
+            <div id="search" class="center-content">
+                <div>
+                    <div>
+                    <input id="id-whattodo" name="whattodo" type="radio" value="0" checked="checked"/> I want to buy bitcoins
+                    </div>
+                    <div>
+                    <input name="whattodo" type="radio" value="1" /> I want to sell bitcoins
+                    </div>
+                </div>
+                <div><input id="search-country" placeholder="country" type="text" /></div>
+                <div>
+                    <select>
+                        <optgroup id="paymend-method" label="Online">
+                            <option value="">All online offers</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div><button id="search-btn">find offers</button></div>
+            </div>
+
+            <div id="search-result">
+                <div id="search-result-sell" class="continer-section">
+                    <div class="home-title">Results for sell bitcoins online</div>
+                    <div id="result-sell-bitcoins" class="list-continer">
+                        <table class="table table-striped">
+                            <tr>
+                                <th width="50%">Seller</th>
+                                <th width="25%">Price</th>
+                                <th width="25%">&nbsp;</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="search-result-buy" class="continer-section">
+                    <div class="home-title">Results for buy bitcoins online</div>
+                    <div id="result-buy-bitcoins" class="list-continer">
+                        <table class="table table-striped">
+                            <tr>
+                                <th width="50%">Seller</th>
+                                <th width="25%">Price</th>
+                                <th width="25%">&nbsp;</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main-result">
+
+                <div class="continer-section">
+                    <div class="home-title">Buy bitcoins online in <span class="fill-country"></span></div>
+                    <div id="buy-bitcoins" class="short-list list-continer">
+                        <table class="table table-striped">
+                            <tr>
+                                <th width="50%">Seller</th>
+                                <th width="25%">Price</th>
+                                <th width="25%">&nbsp;</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <button class="more-btn">more offers</button>
+                    <button class="less-btn">less offers</button>
+                    </div>
+                </div>
+                <div class="continer-section">
+                    <div class="home-title">Buy bitcoins with cash near You</div>
+                    <div id="buy-cash-near" class="short-list list-continer">
+                        <table class="table table-striped">
+                            <tr>
+                                <th width="50%">Seller</th>
+                                <th width="25%">Price</th>
+                                <th width="25%">&nbsp;</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <button class="more-btn">more offers</button>
+                    <button class="less-btn">less offers</button>
+                    </div>
+                </div>
+                <div class="continer-section">
+                    <div class="home-title">Sell bitcoins online in <span class="fill-country"></span></div>
+                    <div id="sell-bitcoins" class="short-list list-continer">
+                        <table class="table table-striped">
+                            <tr>
+                                <th width="50%">Buyer</th>
+                                <th width="25%">Price</th>
+                                <th width="25%">&nbsp;</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <button class="more-btn">more offers</button>
+                    <button class="less-btn">less offers</button>
+                    </div>
+                </div>
+                <div class="continer-section">
+                    <div class="home-title">Sell bitcoins with cash near You</div>
+                    <div id="sell-cash-near" class="short-list list-continer">
+                        <table class="table table-striped">
+                            <tr>
+                                <th width="50%">Buyer</th>
+                                <th width="25%">Price</th>
+                                <th width="25%">&nbsp;</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <button class="more-btn">more offers</button>
+                    <button class="less-btn">less offers</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
   </body>
 </html>
