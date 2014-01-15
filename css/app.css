@@ -1,241 +1,241 @@
 *
 {
-	margin:0px;
-	padding:0px;
+  margin:0px;
+  padding:0px;
 }
 
 #defaults-graph
 {
-	width:300px;
-	height: 250px;
-	text-align:center;
-	padding-bottom: 1px;
+  width:300px;
+  height: 250px;
+  text-align:center;
+  padding-bottom: 1px;
     padding-top: 5px;
-	margin: 30px auto 50px auto;
+  margin: 30px auto 50px auto;
 }
 
 #search-country
 {
-	text-transform:capitalize;
+  text-transform:capitalize;
 }
 
 #defaults-graph .label
 {
-	background:none;
-	color:#000;
+  background:none;
+  color:#000;
 }
 
 #home-btn
 {
-	background:none;
-	outline:none;
+  background:none;
+  outline:none;
 }
 
 #header
 {
-	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
-	background-color: #FAFAFA;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+  background-color: #FAFAFA;
     background-image: linear-gradient(to bottom, #FFFFFF, #F2F2F2);
-	border:1px solid #D4D4D4;
-	overflow:hidden;
-	line-height:60px;
-	height:60px;
-	margin-bottom:2px;
+  border:1px solid #D4D4D4;
+  overflow:hidden;
+  line-height:60px;
+  height:60px;
+  margin-bottom:2px;
 }
 
 #header > div
 {
-	width:50%;
-	float:left;
-	text-align:center;
+  width:50%;
+  float:left;
+  text-align:center;
 }
 
 #header > div:first-child
 {
-	width:25%;
+  width:25%;
 }
 
 
 
 #header > div:last-child
 {
-	width:25%;
+  width:25%;
 }
 
 #home-subtitle,.rtp-title
 {
-	font-size:17px;
-	text-align:center;
-	margin-bottom:20px;
+  font-size:17px;
+  text-align:center;
+  margin-bottom:20px;
 }
 
 #home-subtitle,.rtp-title span
 {
-	color:#1c6ebf;
+  color:#1c6ebf;
 }
 
 #home-subtitle span
 {
-	color:#000;
+  color:#000;
 }
 
 .home-title
 {
-	line-height:36px;
-	font-size:36px;
-	font-weight:bold;
-	text-align:center;
-	margin:20px 0px;
+  line-height:36px;
+  font-size:36px;
+  font-weight:bold;
+  text-align:center;
+  margin:20px 0px;
 }
 
 .continer-section
 {
-	margin:10px;
+  margin:10px;
 }
 
 #search input[type="radio"]
 {
-	margin:0;
+  margin:0;
 }
 
 #loading-page
 {
-	width:100%;
-	position:absolute;
-	background-color:rgba(0,0,0,0.5);
-	text-align:center;
-	display:none;
+  width:100%;
+  position:absolute;
+  background-color:rgba(0,0,0,0.5);
+  text-align:center;
+  display:none;
 }
 
 #login-form .home-title
 {
-	padding: 10px 0px;
+  padding: 10px 0px;
 }
 
 #loading-page img
-{		
-	margin:250px auto 0 auto;
+{   
+  margin:250px auto 0 auto;
 }
 
 #page-content
 {
-	padding: 10px;
+  padding: 10px;
 }
 
 #search-result > div,.page,.less-btn
 {
-	display:none;
+  display:none;
 }
 
 #search,#login-form
 {
-	border-radius:5px;
-	padding: 4px 10px;
-	color:#fff;
+  border-radius:5px;
+  padding: 4px 10px;
+  color:#fff;
 }
 
 #login-page .rtp-title
 {
-	padding:10px;
+  padding:10px;
 }
 
 #search input[type="text"],#login-page input[type="text"],#login-page input[type="password"]
 {
-	padding:6px 2%;
+  padding:6px 2%;
 }
 
 #search input[type="text"],#login-page input[type="text"],#login-page input[type="password"]
 {
-	width:96%;
+  width:96%;
 }
 
 #search > div,#login-page div
 {
-	margin:5px 0;
+  margin:5px 0;
 }
 
 #search select
 {
-	width:100%;
-	height:28px;
+  width:100%;
+  height:28px;
 }
 
 #search div:first-child
 {
-	overflow:hidden;
+  overflow:hidden;
 }
 
 #search div:first-child > div
 {
-	width:50%;
-	float:left;
-	height:25px;
-	line-height:25px;
+  width:50%;
+  float:left;
+  height:25px;
+  line-height:25px;
 }
 
 #search div:last-child,.continer-section > div:last-child,#login-page div:last-child
 {
-	text-align:center;
+  text-align:center;
 }
 
 .short-list > table > tbody > tr:nth-of-type(n+7) 
 {
-	display: none;
+  display: none;
 }
 
 .list-continer table > tbody > tr > td:first-child
 {
-	color:#1c6ebf;
+  color:#1c6ebf;
 }
 
 .list-continer table > tbody > tr > td
 {
-	color:#008000;
-	font-weight:bold;
+  color:#008000;
+  font-weight:bold;
 }
 
 .list-continer button,.continer-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn,#home-btn
 {
-	font-weight:bold;
-	color:#fff;	
-	border:none;	
-	border-radius:3px;
-	margin:5px;
+  font-weight:bold;
+  color:#fff; 
+  border:none;  
+  border-radius:3px;
+  margin:5px;
 }
 
 .list-continer button,#search button,#auth-btn,#exchange-btn
 {
-	background-color:#1c6ebf;
+  background-color:#1c6ebf;
 }
 
 .continer-section > div:last-child > button,#search,#login-form,#login-btn
 {
-	background-color:#f58220;
+  background-color:#f58220;
 }
 
 .list-continer button:hover,#search button:hover,#auth-btn,#exchange-btn:hover
 {
-	background-color:#165da3;
+  background-color:#165da3;
 }
 
 .continer-section > div:last-child > button:hover,#login-btn:hover
 {
-	background-color:#d26a20;
+  background-color:#d26a20;
 }
 
 
 .list-continer button,.continer-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn
 {
-	padding:3px 30px;
+  padding:3px 30px;
 }
 
 #exchange-page > div
 {
-	text-align:center;
+  text-align:center;
 }
 
 .alert
 {
-	display:none;
-	text-align:center;
+  display:none;
+  text-align:center;
 }
