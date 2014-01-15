@@ -755,7 +755,7 @@ function InitLocalbitcoins(tn)
 
         $.each(data.data.methods, function( key, val ) {
             pm.append('<option value="'+val.code+'">'+val.name+'</option>');
-            POVIDER_ONLINE[val.code] = [val.name,key];
+            POVIDER_ONLINE[val.code] = [val.name, key];
         });
 
     });
@@ -879,7 +879,8 @@ function InitLocalbitcoins(tn)
 
         var payment_method = $('#paymend-method').parent().val();
 
-        payment_method = POVIDER_ONLINE[payment_method][1];
+        if (payment_method != '')
+            payment_method = POVIDER_ONLINE[payment_method][1];
 
         if(!buy_boolean)
         {
