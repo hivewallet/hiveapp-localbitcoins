@@ -1,6 +1,6 @@
 {
   "name": "LocalBitcoins",
-  "id": "localbitcoins",
+  "id": "com.hivewallet.localbitcoins",
   "version": "0.9.1",
   "author": "Recoded.co",
   "description": "Localbitcoins Hive App",
