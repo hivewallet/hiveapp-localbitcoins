@@ -840,8 +840,7 @@ function InitLocalbitcoins(tn)
                         client_secret: clientSecret,
                         grant_type: "password",
                         username: $('#login-name').val(),
-                        password: $('#login-password').val(),
-                        scope: "read+write"
+                        password: $('#login-password').val()
                     },success:function(data)
                     {
                         tokens.access_token = data.access_token;
