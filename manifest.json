@@ -1,7 +1,7 @@
 {
   "name": "LocalBitcoins",
   "id": "com.hivewallet.localbitcoins",
-  "version": "0.9.1",
+  "version": "1.0.2",
   "author": "Recoded.co",
   "description": "Trade Bitcoin with someone nearby",
   "icon": "icon.png"
