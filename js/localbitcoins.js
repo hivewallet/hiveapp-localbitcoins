@@ -19,7 +19,6 @@ LocalBitcoins.prototype.request_post = function(url_string, extra_data, success_
   ajax({
     dataType: "json",
     type: 'POST',
-    async: false,
     url: site.root + url_string,
     data: form,
     success: function(data) {
