@@ -722,42 +722,29 @@ function InitLocalbitcoins(tn)
 
     $('#auth-btn').click(function() {
 
-            $('.alert').hide();
+      $('.alert').hide();
 
-            ajax(
-                {
-                    dataType: "json",
-                    type: 'POST',
-                    async:false,
-                    url:site.root + "/oauth2/access_token/",
-                    data:{
-                        client_id: clientID,
-                        client_secret: clientSecret,
-                        grant_type: "password",
-                        username: $('#login-name').val(),
-                        password: $('#login-password').val()
-                    },success:function(data)
-                    {
-                        tokens.access_token = data.access_token;
+      var success = function(data) {
+        tokens.access_token = data.access_token;
 
+        if (data.error) {
+          $("#login-error").show().html('Invalid username or password');
+        }else{
+          logged = true;
+          $('#login-btn').html('account');
+          refresh_account();
+        }
 
-                        if (data.error)
-                        {
-                          $("#login-error").show().html('Invalid username or password');
-                        }else{
-                            logged = true;
-                            $('#login-btn').html('account');
-                            refresh_account();
-                        }
+        wait(false);
+      }
 
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        $("#login-error").show().html('Invalid username or password');
-                    }
-                }
-            );
+      var error = function(xhr, ajaxOptions, thrownError) {
+        $("#login-error").show().html('Invalid username or password');
+        wait(false);
+      }
 
-
+      wait(true);
+      localbitcoins.login($('#login-name').val(), $('#login-password').val(), success, error)
     });
 
     $('#search-btn').click(function() {
