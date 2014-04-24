@@ -89,28 +89,11 @@ var COUNTRY_NAMES = [
     "Aland Islands","Guernsey","Isle of Man","Jersey","Saint Barthelemy","Saint Martin"
     ];
 
-var clientID = "bf4786cc3d61c977a00d",
-clientSecret = "278240b45e3ff14a7d972b3055224a5f67feaed7";
-
 var logged = false;
-
-var site = {
-  name: "localbitcoins.com",
-  root: "https://localbitcoins.com"
-};
-
-var sCountryCode = "pl";
 
 var locationInfo = {
     countryCode: 'pl'
 }
-
-var tokens = {
-    access_token: "268403ff995ba2448a9b5e758bacb09de6d8f877",
-    expires_in: "31535999",
-    refresh_token: "a049036c4d7aaece1b7fd197143e0428d2d2ce1f",
-    scope: "read"
-};
 
 function updateInfo(val,own)
 {
@@ -704,8 +687,6 @@ function InitLocalbitcoins(tn)
       $('.alert').hide();
 
       var success = function(data) {
-        tokens.access_token = data.access_token;
-
         if (data.error) {
           $("#login-error").show().html('Invalid username or password');
         }else{

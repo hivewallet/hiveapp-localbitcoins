@@ -23,8 +23,7 @@ var apiPaths = {
 var postEndpoints = ['myself', 'ads', 'escrows']
 var getEndpoints = ['payment_methods', 'ticker']
 
-LocalBitcoins = function(){
-}
+LocalBitcoins = function() {}
 
 LocalBitcoins.prototype.request_post = function(path, extra_data, success_callback) {
   var form = extra_data;
@@ -60,7 +59,10 @@ LocalBitcoins.prototype.login = function(username, password, success, error) {
     username: username,
     password: password
   }
-  post("/oauth2/access_token/", data, success, error)
+  post("/oauth2/access_token/", data, function(data){
+    tokens.access_token = data.access_token
+    success(data)
+  }, error)
 }
 
 LocalBitcoins.prototype.trades = function(currency, callback) {
