@@ -674,13 +674,7 @@ function InitLocalbitcoins(tn)
     $('#home-btn').click(function() {
         $('.page').hide();
         $('#main-page').show();
-
-        $('#search-result-sell').hide();
-        $('#search-result-buy').hide();
-
         refresh_homepage();
-
-        $('#main-result').show();
     });
 
 
