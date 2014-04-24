@@ -1,3 +1,10 @@
+var localbitcoins = new LocalBitcoins()
+Object.getPrototypeOf(localbitcoins).ajax = function(xhrParams) {
+  var url = xhrParams.url;
+  delete xhrParams.url;
+  bitcoin.makeRequest(url, xhrParams);
+}
+
 jQuery(document).ready(function(){
     InitLocalization();
 });
@@ -94,15 +101,8 @@ var site = {
 
 var sCountryCode = "pl";
 
-var locationInfo =
-{
-    countryCode: 'pl',
-    countryName: 'Poland',
-    cityName: 'Warsaw',
-    lat: 51.028515,
-    lon: 16.966439,
-    locationId: '',
-    locationSlug: ''
+var locationInfo = {
+    countryCode: 'pl'
 }
 
 var apiUrl =
@@ -121,59 +121,6 @@ var tokens = {
     refresh_token: "a049036c4d7aaece1b7fd197143e0428d2d2ce1f",
     scope: "read"
 };
-
-
-function request_post_ex(url_string,extra_data,success_callback)
-{
-    var form = extra_data;
-    form.access_token = tokens.access_token;
-
-    ajax(
-        {
-            dataType: "json",
-            type: 'POST',
-            async:false,
-            url:url_string,
-            data:form,
-            success:function(data)
-            {
-                success_callback(data,true);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                success_callback(xhr.responseText,false);
-            }
-        }
-    );
-}
-
-
-function request_post(url_string,extra_data,success_callback)
-{
-    request_post_ex(site.root + url_string,extra_data,success_callback);
-}
-
-function request_get_ex(url_string,extra_data,success_callback)
-{
-    ajax(
-            {
-                dataType: "json",
-                type: 'GET',
-                url:url_string,
-                data:extra_data,
-                success:function(data) {
-                    success_callback(data,true);
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    success_callback(xhr.responseText,false);
-                }
-            }
-        );
-    }
-
-function request_get(url_string,extra_data,success_callback)
-{
-    request_get_ex(site.root + url_string,extra_data,success_callback);
-}
 
 function updateInfo(val,own)
 {
@@ -231,7 +178,7 @@ function updateEditInfo(val_id)
 
         var gtu = $(this).attr('id').substring(4);
 
-        request_post('/api/ad/'+gtu+'/',{
+        localbitcoins.request_post('/api/ad/'+gtu+'/',{
             visible:($('#edit-info-visible').val()=='true'),
 
             min_amount:corect_number(jQuery('#edit-info-min').val()),
@@ -299,7 +246,7 @@ function updateGraph(value)
     var buyContiner = $('#trades-continer').find('tbody');
     buyContiner.children().first().nextAll().remove();
 
-    request_get('/bitcoincharts/'+EXCHENGE_BTN[value][0]+'/trades.json',{},function(data)
+    localbitcoins.request_get('/bitcoincharts/'+EXCHENGE_BTN[value][0]+'/trades.json',{},function(data)
     {
         $.each(data, function( key, val ) {
             var d1 = new Date(val.date);
@@ -385,7 +332,7 @@ function findBuyBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,recon
 
     urlNode += '/.json';
 
-    request_get(urlNode,{},function(data) {
+    localbitcoins.request_get(urlNode,{},function(data) {
         var buyContiner = buyContinerObject.find('tbody');
 
         buyContiner.children().first().nextAll().remove();
@@ -416,7 +363,7 @@ function findBuyBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,recon
 
                 $('#uid-un').html(gtu);
 
-                request_get('/api/account_info/'+gtu+'/',{},function(data)
+                localbitcoins.request_get('/api/account_info/'+gtu+'/',{},function(data)
                 {
                     $('#uid-tpc').html(data.data.trading_partners_count);
                     $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
@@ -478,7 +425,7 @@ function findSellBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,reco
 
     urlNode += '/.json';
 
-    request_get(urlNode,{},function(data)
+    localbitcoins.request_get(urlNode,{},function(data)
     {
         var buyContiner = buyContinerObject.find('tbody');
 
@@ -510,7 +457,7 @@ function findSellBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,reco
 
                 $('#uid-un').html(gtu);
 
-                request_get('/api/account_info/'+gtu+'/',{},function(data)
+                localbitcoins.request_get('/api/account_info/'+gtu+'/',{},function(data)
                 {
                     $('#uid-tpc').html(data.data.trading_partners_count);
                     $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
@@ -579,7 +526,7 @@ function refresh_account()
     $('#user-page').show();
 
 
-    request_post(apiUrl.myself,{},function(data)
+    localbitcoins.request_post(apiUrl.myself,{},function(data)
     {
         $('#myself-tpc').html(data.data.trading_partners_count);
         $('#myself-fuc').html(data.data.feedbacks_unconfirmed_count);
@@ -589,7 +536,7 @@ function refresh_account()
         $('#myself-tc').html(data.data.trusted_count);
     });
 
-    request_post(apiUrl.ads,{},function(data)
+    localbitcoins.request_post(apiUrl.ads,{},function(data)
     {
         var buyContiner = $('#user-ads-continer').find('tbody');
         buyContiner.children().first().nextAll().remove();
@@ -600,7 +547,7 @@ function refresh_account()
 
     });
 
-    request_post(apiUrl.escrows,{},function(data)
+    localbitcoins.request_post(apiUrl.escrows,{},function(data)
     {
         var buyContiner = $('#user-escrow-continer').find('tbody');
         buyContiner.children().first().nextAll().remove();
@@ -636,7 +583,7 @@ function refresh_account()
 
         var gtu = $(this).attr('id').substring(4);
 
-        request_post_ex(gtu,{},function(data)
+        localbitcoins.request_post(gtu,{},function(data)
         {
 
         });
@@ -652,54 +599,12 @@ function refresh_homepage()
 {
     wait(true);
 
-    request_get('/api/places/',{lat:locationInfo.lat,lon:locationInfo.lon},function(data)
-    {
-
-        $.each(data.data.places, function( key, val ) {
-
-            var idCountry = $.trim(val.location_string.split(",")[1]);
-
-            var iPos = jQuery.inArray( idCountry , COUNTRY_CODES );
-
-            if(iPos!=-1)
-            {
-                locationInfo.countryCode = idCountry;
-                locationInfo.countryName = COUNTRY_NAMES[iPos];
-                $('.fill-country').text(locationInfo.countryName);
-            }else{
-                if((iPos = jQuery.inArray( idCountry , COUNTRY_NAMES ))!=-1)
-                {
-                    locationInfo.countryName = idCountry;
-                    locationInfo.countryCode = COUNTRY_CODES[iPos];
-                }
-            }
-
-            request_get_ex(val.sell_local_url,{},function(data)
-            {
-                var buyContiner = $("#sell-cash-near").find('tbody');
-
-                $.each(data.data.ad_list, function( key, val ) {
-                    buyContiner.append('<tr><td><a class="user-detalis" href="'+val.data.profile.username+'">'+val.data.profile.name+'</a></td><td>'+val.data.temp_price+' '+val.data.currency+'</td><td><button class="info-btn" id="iid-'+val.data.ad_id+'">info</button></td></tr>');
-                    HOMEPAGE_DATA[val.data.ad_id] = val.data;
-                });
-
-            });
-
-            request_get_ex(val.buy_local_url,{},function(data)
-            {
-                var buyContiner = $("#buy-cash-near").find('tbody');
-
-                $.each(data.data.ad_list, function( key, val ) {
-                    buyContiner.append('<tr><td><a class="user-detalis" href="'+val.data.profile.username+'">'+val.data.profile.name+'</a></td><td>'+val.data.temp_price+' '+val.data.currency+'</td><td><button class="info-btn" id="iid-'+val.data.ad_id+'">info</button></td></tr>');
-                    HOMEPAGE_DATA[val.data.ad_id] = val.data;
-                });
-
-            });
-        });
-    });
-
-    findSellBitcoinsOnlice(locationInfo.countryName,null,$("#sell-bitcoins"),false);
-    findBuyBitcoinsOnlice(locationInfo.countryName,null,$("#buy-bitcoins"),false);
+    if(locationInfo.countryName) {
+      findSellBitcoinsOnlice(locationInfo.countryName,null,$("#sell-bitcoins"),false);
+      findBuyBitcoinsOnlice(locationInfo.countryName,null,$("#buy-bitcoins"),false);
+    } else {
+      $('#main-result').hide();
+    }
 
     $('.info-btn').unbind('click');
     $('.info-btn').bind('click',function() {
@@ -719,7 +624,7 @@ function refresh_homepage()
 
         $('#uid-un').html(gtu);
 
-        request_get('/api/account_info/'+gtu+'/',{},function(data)
+        localbitcoins.request_get('/api/account_info/'+gtu+'/',{},function(data)
         {
             $('#uid-tpc').html(data.data.trading_partners_count);
             $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
@@ -745,7 +650,7 @@ function InitLocalbitcoins(tn)
         $('#main-result').hide();
     }
 
-    request_get(apiUrl.payment_methods,{},function(data)
+    localbitcoins.request_get(apiUrl.payment_methods,{},function(data)
     {
         var pm = $('#paymend-method');
 
@@ -787,7 +692,7 @@ function InitLocalbitcoins(tn)
         $('.page').hide();
         $('#exchange-page').show();
 
-        request_get('/bitcoinaverage/ticker-all-currencies/',{},function(data)
+        localbitcoins.request_get('/bitcoinaverage/ticker-all-currencies/',{},function(data)
         {
             var pm = $('#exchcenge-select');
 
