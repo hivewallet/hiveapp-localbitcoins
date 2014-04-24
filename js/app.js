@@ -258,9 +258,17 @@ function InitLocalization()
     InitLocalbitcoins(false);
 }
 
-function findBuyBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,reconizeCC)
+function findBuyBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,reconizeCC){
+  findBitcoinDealsOnlice("buy", countryName, paymentMethod, buyContinerObject, reconizeCC)
+}
+
+function findSellBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,reconizeCC){
+  findBitcoinDealsOnlice("sell", countryName, paymentMethod, buyContinerObject, reconizeCC)
+}
+
+function findBitcoinDealsOnlice(type, countryName,paymentMethod,buyContinerObject,reconizeCC)
 {
-    var urlNode = '/buy-bitcoins-online';
+    var urlNode = '/' + type + '-bitcoins-online';
 
     if(countryName != '' && countryName != null)
     {
@@ -294,98 +302,6 @@ function findBuyBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,recon
 
         }else{
             urlNode += '/'+locationInfo.countryCode+'/'+countryName.toLowerCase();
-        }
-    }
-
-    if(paymentMethod != '' && paymentMethod != null)
-    {
-        urlNode += '/'+paymentMethod;
-    }
-
-    urlNode += '/.json';
-
-    localbitcoins.request_get(urlNode,{},function(data) {
-        var buyContiner = buyContinerObject.find('tbody');
-
-        buyContiner.children().first().nextAll().remove();
-
-        $.each(data.data.ad_list, function( key, val ) {
-            buyContiner.append('<tr><td><a class="user-detalis" href="'+val.data.profile.username+'">'+val.data.profile.name+'</a></td><td>'+val.data.temp_price+' '+val.data.currency+'</td><td><button class="info-btn" id="iid-'+val.data.ad_id+'">info</button></td></tr>');
-            HOMEPAGE_DATA[val.data.ad_id] = val.data;
-        });
-
-        if(reconizeCC)
-        {
-            $('.info-btn').unbind('click');
-            $('.info-btn').bind('click',function() {
-
-                var gtu = $(this).attr('id').substring(4);
-                $('.page').hide();
-                $('#info-page').show();
-
-                updateInfo(gtu,false);
-            });
-
-            $('.user-detalis').unbind('click');
-            $('.user-detalis').bind('click',function() {
-
-                var gtu = $(this).attr('href');
-                $('.page').hide();
-                $('#info-user-detalis').show();
-
-                $('#uid-un').html(gtu);
-
-                localbitcoins.account(gtu, function(data) {
-                    $('#uid-tpc').html(data.data.trading_partners_count);
-                    $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
-                    $('#uid-tvt').html(data.data.trade_volume_text);
-                    $('#uid-tbc').html(data.data.blocked_count);
-                    $('#uid-fc').html(data.data.feedback_count);
-                    $('#uid-tc').html(data.data.trusted_count);
-                });
-                return false;
-            });
-        }
-
-    });
-}
-
-function findSellBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,reconizeCC)
-{
-    var urlNode = '/sell-bitcoins-online';
-
-    if(countryName != '' && countryName != null)
-    {
-        if(reconizeCC)
-        {
-            var idCountry = $.trim(countryName);
-            var newCountryName = "";
-
-            idCountry = idCountry.split(" ");
-
-            for(var i=0;i<idCountry.length;i++)
-            {
-                newCountryName += " "+ idCountry[i][0].toUpperCase() + idCountry[i].substring(1).toLowerCase();
-            }
-
-            idCountry = $.trim(newCountryName);
-
-            var iPos = -1;
-
-            if((iPos = jQuery.inArray( idCountry , COUNTRY_NAMES ))!=-1)
-            {
-                iPos = COUNTRY_CODES[iPos];
-            }
-
-            if(iPos != -1)
-            {
-                urlNode += '/'+iPos+'/'+countryName;
-            }else{
-                urlNode += '/'+locationInfo.countryCode+'/'+countryName;
-            }
-
-        }else{
-            urlNode += '/'+locationInfo.countryCode+'/'+countryName;
         }
     }
 
