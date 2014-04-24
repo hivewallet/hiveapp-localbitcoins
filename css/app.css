@@ -165,9 +165,10 @@
   overflow:hidden;
 }
 
-#search div:first-child > div
+#search div:first-child > label
 {
-  width:50%;
+  padding-left: 1px;
+  width:49%;
   float:left;
   height:25px;
   line-height:25px;
