@@ -4,5 +4,6 @@
   "version": "1.0.2",
   "author": "Recoded.co",
   "description": "Trade Bitcoin with someone nearby",
-  "icon": "icon.png"
+  "icon": "icon.png",
+  "accessedHosts": ["localbitcoins.com"]
 }

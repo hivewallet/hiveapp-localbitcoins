@@ -1,6 +1,5 @@
 jQuery(document).ready(function(){
     InitLocalization();
-    //InitLocalbitcoins();
 });
 
 var POVIDER_ONLINE = [];
@@ -129,7 +128,7 @@ function request_post_ex(url_string,extra_data,success_callback)
     var form = extra_data;
     form.access_token = tokens.access_token;
 
-    jQuery.ajax(
+    ajax(
         {
             dataType: "json",
             type: 'POST',
@@ -155,15 +154,13 @@ function request_post(url_string,extra_data,success_callback)
 
 function request_get_ex(url_string,extra_data,success_callback)
 {
-    jQuery.ajax(
+    ajax(
             {
                 dataType: "json",
                 type: 'GET',
-                async:false,
                 url:url_string,
                 data:extra_data,
-                success:function(data)
-                {
+                success:function(data) {
                     success_callback(data,true);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -388,8 +385,7 @@ function findBuyBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,recon
 
     urlNode += '/.json';
 
-    request_get(urlNode,{},function(data)
-    {
+    request_get(urlNode,{},function(data) {
         var buyContiner = buyContinerObject.find('tbody');
 
         buyContiner.children().first().nextAll().remove();
@@ -829,7 +825,7 @@ function InitLocalbitcoins(tn)
 
             $('.alert').hide();
 
-            jQuery.ajax(
+            ajax(
                 {
                     dataType: "json",
                     type: 'POST',
@@ -894,3 +890,10 @@ function InitLocalbitcoins(tn)
 
     });
 }
+
+function ajax(xhrParams) {
+  var url = xhrParams.url;
+  delete xhrParams.url;
+  bitcoin.makeRequest(url, xhrParams);
+}
+
