@@ -16,11 +16,12 @@ var apiPaths = {
   places: '/api/places/',
   ads: '/api/ads/',
   escrows: '/api/escrows/',
-  myself: '/api/myself/'
+  myself: '/api/myself/',
+  ticker: '/bitcoinaverage/ticker-all-currencies/'
 }
 
 var postEndpoints = ['myself', 'ads', 'escrows']
-var getEndpoints = ['payment_methods']
+var getEndpoints = ['payment_methods', 'ticker']
 
 LocalBitcoins = function(){
 }
@@ -60,6 +61,14 @@ LocalBitcoins.prototype.login = function(username, password, success, error) {
     password: password
   }
   post("/oauth2/access_token/", data, success, error)
+}
+
+LocalBitcoins.prototype.trades = function(currency, callback) {
+  this.request_get('/bitcoincharts/'+ currency +'/trades.json', {}, callback)
+}
+
+LocalBitcoins.prototype.account = function(gtu, callback) {
+  this.request_get('/api/account_info/'+ gtu + '/', {}, callback)
 }
 
 postEndpoints.forEach(function(method) {

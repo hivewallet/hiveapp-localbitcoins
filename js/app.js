@@ -236,8 +236,7 @@ function updateGraph(value)
     var buyContiner = $('#trades-continer').find('tbody');
     buyContiner.children().first().nextAll().remove();
 
-    localbitcoins.request_get('/bitcoincharts/'+EXCHENGE_BTN[value][0]+'/trades.json',{},function(data)
-    {
+    localbitcoins.trades(EXCHENGE_BTN[value][0], function(data) {
         $.each(data, function( key, val ) {
             var d1 = new Date(val.date);
 
@@ -353,8 +352,7 @@ function findBuyBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,recon
 
                 $('#uid-un').html(gtu);
 
-                localbitcoins.request_get('/api/account_info/'+gtu+'/',{},function(data)
-                {
+                localbitcoins.account(gtu, function(data) {
                     $('#uid-tpc').html(data.data.trading_partners_count);
                     $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
                     $('#uid-tvt').html(data.data.trade_volume_text);
@@ -415,8 +413,7 @@ function findSellBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,reco
 
     urlNode += '/.json';
 
-    localbitcoins.request_get(urlNode,{},function(data)
-    {
+    localbitcoins.request_get(urlNode,{},function(data) {
         var buyContiner = buyContinerObject.find('tbody');
 
         buyContiner.children().first().nextAll().remove();
@@ -447,8 +444,7 @@ function findSellBitcoinsOnlice(countryName,paymentMethod,buyContinerObject,reco
 
                 $('#uid-un').html(gtu);
 
-                localbitcoins.request_get('/api/account_info/'+gtu+'/',{},function(data)
-                {
+                localbitcoins.account(gtu, function(data) {
                     $('#uid-tpc').html(data.data.trading_partners_count);
                     $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
                     $('#uid-tvt').html(data.data.trade_volume_text);
@@ -610,8 +606,7 @@ function refresh_homepage()
 
         $('#uid-un').html(gtu);
 
-        localbitcoins.request_get('/api/account_info/'+gtu+'/',{},function(data)
-        {
+        localbitcoins.account(gtu, function(data) {
             $('#uid-tpc').html(data.data.trading_partners_count);
             $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
             $('#uid-tvt').html(data.data.trade_volume_text);
@@ -671,8 +666,7 @@ function InitLocalbitcoins(tn)
         $('.page').hide();
         $('#exchange-page').show();
 
-        localbitcoins.request_get('/bitcoinaverage/ticker-all-currencies/',{},function(data)
-        {
+        localbitcoins.ticker(function(data) {
             var pm = $('#exchcenge-select');
 
             var iCounter = 0;
