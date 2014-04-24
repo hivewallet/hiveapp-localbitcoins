@@ -105,16 +105,6 @@ var locationInfo = {
     countryCode: 'pl'
 }
 
-var apiUrl =
-{
-  payment_methods: '/api/payment_methods/',
-  country_codes: '/api/countrycodes/',
-  places: '/api/places/',
-  ads: '/api/ads/',
-  escrows: '/api/escrows/',
-  myself: '/api/myself/'
-}
-
 var tokens = {
     access_token: "268403ff995ba2448a9b5e758bacb09de6d8f877",
     expires_in: "31535999",
@@ -525,9 +515,7 @@ function refresh_account()
     $('.page').hide();
     $('#user-page').show();
 
-
-    localbitcoins.request_post(apiUrl.myself,{},function(data)
-    {
+    localbitcoins.myself(function(data) {
         $('#myself-tpc').html(data.data.trading_partners_count);
         $('#myself-fuc').html(data.data.feedbacks_unconfirmed_count);
         $('#myself-tvt').html(data.data.trade_volume_text);
@@ -536,19 +524,16 @@ function refresh_account()
         $('#myself-tc').html(data.data.trusted_count);
     });
 
-    localbitcoins.request_post(apiUrl.ads,{},function(data)
-    {
+    localbitcoins.ads(function(data) {
         var buyContiner = $('#user-ads-continer').find('tbody');
         buyContiner.children().first().nextAll().remove();
         $.each(data.data.ad_list, function( key, val ) {
             buyContiner.append('<tr><td>'+val.data.visible+'</td><td>'+val.data.temp_price+' '+val.data.currency+'</td><td>'+corect_trade_limits(val.data.min_amount,val.data.max_amount)+'</td><td><button class="info-btn" id="iid-'+val.data.ad_id+'">info</button><button class="edit-btn" id="iid-'+val.data.ad_id+'">edit</button></td></tr>');
             HOMEPAGE_DATA[val.data.ad_id] = val.data;
         });
-
     });
 
-    localbitcoins.request_post(apiUrl.escrows,{},function(data)
-    {
+    localbitcoins.escrows(function(data) {
         var buyContiner = $('#user-escrow-continer').find('tbody');
         buyContiner.children().first().nextAll().remove();
 
@@ -558,6 +543,7 @@ function refresh_account()
         });
 
     });
+
     $('.info-btn').unbind('click');
     $('.info-btn').bind('click',function() {
 
@@ -650,8 +636,7 @@ function InitLocalbitcoins(tn)
         $('#main-result').hide();
     }
 
-    localbitcoins.request_get(apiUrl.payment_methods,{},function(data)
-    {
+    localbitcoins.payment_methods(function(data) {
         var pm = $('#paymend-method');
 
         $.each(data.data.methods, function( key, val ) {

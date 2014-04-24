@@ -10,6 +10,17 @@ var tokens = {
 };
 var clientID = "bf4786cc3d61c977a00d",
 clientSecret = "278240b45e3ff14a7d972b3055224a5f67feaed7";
+var apiPaths = {
+  payment_methods: '/api/payment_methods/',
+  country_codes: '/api/countrycodes/',
+  places: '/api/places/',
+  ads: '/api/ads/',
+  escrows: '/api/escrows/',
+  myself: '/api/myself/'
+}
+
+var postEndpoints = ['myself', 'ads', 'escrows']
+var getEndpoints = ['payment_methods']
 
 LocalBitcoins = function(){
 }
@@ -50,6 +61,18 @@ LocalBitcoins.prototype.login = function(username, password, success, error) {
   }
   post("/oauth2/access_token/", data, success, error)
 }
+
+postEndpoints.forEach(function(method) {
+  LocalBitcoins.prototype[method] = function(callback) {
+    this.request_post(apiPaths[method], {}, callback)
+  }
+})
+
+getEndpoints.forEach(function(method) {
+  LocalBitcoins.prototype[method] = function(callback) {
+    this.request_get(apiPaths[method], {}, callback)
+  }
+})
 
 function post(path, data, success, error){
   ajax({
