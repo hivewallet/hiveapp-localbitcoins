@@ -276,6 +276,9 @@ function findSellBitcoinsOnlice(countryName,paymentMethod,buyContinerObject) {
 }
 
 function findBitcoinDealsOnlice(type, countryName,paymentMethod,buyContinerObject) {
+    $('#search-result-buy').hide();
+    $('#search-result-sell').hide();
+    wait(true)
     var urlNode = '/' + type + '-bitcoins-online';
 
     if(countryName != '' && countryName != null) {
@@ -328,6 +331,9 @@ function findBitcoinDealsOnlice(type, countryName,paymentMethod,buyContinerObjec
             });
             return false;
         });
+
+        $('#search-result-' + type).show();
+        wait(false)
     });
 }
 
@@ -598,10 +604,6 @@ function InitLocalbitcoins(tn)
 
     $('#search-btn').click(function() {
 
-        $('#main-result').hide();
-
-        wait(true);
-
         var buy_boolean = $('#id-whattodo').prop('checked');
         var buy_cach = false;
 
@@ -612,17 +614,11 @@ function InitLocalbitcoins(tn)
         if (payment_method != '')
             payment_method = POVIDER_ONLINE[payment_method][1];
 
-        if(!buy_boolean)
-        {
+        if(!buy_boolean) {
             findSellBitcoinsOnlice(country_name,payment_method,$("#result-sell-bitcoins"));
-            $('#search-result-sell').show();
         }else{
             findBuyBitcoinsOnlice(country_name,payment_method,$("#result-buy-bitcoins"));
-            $('#search-result-buy').show();
         }
-
-        wait(false);
-
     });
 }
 
