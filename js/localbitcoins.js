@@ -29,7 +29,7 @@ LocalBitcoins.prototype.request_post = function(path, extra_data, success_callba
   var form = extra_data;
   form.access_token = tokens.access_token;
 
-  post(path, form, function(data) {
+  post.call(this, path, form, function(data) {
     success_callback(data, true);
   }, function (xhr, ajaxOptions, thrownError) {
     success_callback(xhr.responseText, false);
@@ -59,7 +59,7 @@ LocalBitcoins.prototype.login = function(username, password, success, error) {
     username: username,
     password: password
   }
-  post("/oauth2/access_token/", data, function(data){
+  post.call(this, "/oauth2/access_token/", data, function(data){
     tokens.access_token = data.access_token
     success(data)
   }, error)
