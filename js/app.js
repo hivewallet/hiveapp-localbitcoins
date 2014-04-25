@@ -97,8 +97,10 @@ var locationInfo = {
 }
 
 function initCountries() {
-  COUNTRY_NAMES.sort().forEach(function(country){
-    jQuery('#search-country').append('<option value="' + country + '">' + country + '</option>')
+  var countriesClone = COUNTRY_NAMES.slice()
+  countriesClone.sort().forEach(function(country){
+    var countryName = (country === '') ? 'All Countries' : country
+    jQuery('#search-country').append('<option value="' + country + '">' + countryName + '</option>')
   })
 }
 
