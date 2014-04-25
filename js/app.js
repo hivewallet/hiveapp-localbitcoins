@@ -339,9 +339,8 @@ function findBitcoinDealsOnlice(type, countryName,paymentMethod,buyContinerObjec
 
 function wait(tn)
 {
-    if(tn && $('#loading-page').css('display') == 'none')
-    {
-        $('#loading-page').css("min-height",$('body').height()).show();
+    if(tn && $('#loading-page').css('display') == 'none') {
+        $('#loading-page').show();
     }else{
         $('#loading-page').hide();
     }

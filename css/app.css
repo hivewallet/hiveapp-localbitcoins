@@ -100,8 +100,12 @@
 
 #loading-page
 {
-  width:100%;
-  position:absolute;
+  min-height: 100%;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-color:rgba(0,0,0,0.5);
   text-align:center;
   display:none;
