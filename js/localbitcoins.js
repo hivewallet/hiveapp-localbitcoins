@@ -37,7 +37,7 @@ LocalBitcoins.prototype.request_post = function(path, extra_data, success_callba
 }
 
 LocalBitcoins.prototype.request_get = function(path, extra_data, success_callback) {
-  ajax({
+  this.ajax({
     dataType: "json",
     type: 'GET',
     url: site.root + path,
@@ -86,7 +86,7 @@ getEndpoints.forEach(function(method) {
 })
 
 function post(path, data, success, error){
-  ajax({
+  this.ajax({
     dataType: "json",
     type: 'POST',
     url: site.root + path,

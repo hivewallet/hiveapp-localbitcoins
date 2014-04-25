@@ -1,11 +1,12 @@
 var localbitcoins = new LocalBitcoins()
 Object.getPrototypeOf(localbitcoins).ajax = function(xhrParams) {
-  var url = xhrParams.url;
+  var url = encodeURI(xhrParams.url);
   delete xhrParams.url;
   bitcoin.makeRequest(url, xhrParams);
 }
 
 jQuery(document).ready(function(){
+    initCountries()
     InitLocalization();
 });
 
@@ -93,6 +94,12 @@ var logged = false;
 
 var locationInfo = {
     countryCode: 'pl'
+}
+
+function initCountries() {
+  COUNTRY_NAMES.sort().forEach(function(country){
+    jQuery('#search-country').append('<option value="' + country + '">' + country + '</option>')
+  })
 }
 
 function updateInfo(val,own)
@@ -615,11 +622,5 @@ function InitLocalbitcoins(tn)
         wait(false);
 
     });
-}
-
-function ajax(xhrParams) {
-  var url = xhrParams.url;
-  delete xhrParams.url;
-  bitcoin.makeRequest(url, xhrParams);
 }
 
