@@ -1,13 +1,14 @@
-var localbitcoins = new LocalBitcoins()
+var localbitcoins = new LocalBitcoins();
+
 Object.getPrototypeOf(localbitcoins).ajax = function(xhrParams) {
   var url = encodeURI(xhrParams.url);
   delete xhrParams.url;
   bitcoin.makeRequest(url, xhrParams);
-}
+};
 
-jQuery(document).ready(function(){
-    initCountries()
-    InitLocalization();
+jQuery(document).ready(function() {
+  initCountries();
+  initLocalization();
 });
 
 var POVIDER_ONLINE = [];
@@ -34,221 +35,208 @@ var COUNTRY_CODES = [
   "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN",
   "VU", "WF", "WS", "YE", "YT", "RS", "ZA", "ZM", "ME", "ZW", "A1", "A2", "O1",
   "AX", "GG", "IM", "JE", "BL", "MF"
-    ];
+];
 
 var COUNTRY_NAMES = [
-    "", "Asia/Pacific Region", "Europe", "Andorra", "United Arab Emirates",
-    "Afghanistan", "Antigua and Barbuda", "Anguilla", "Albania", "Armenia",
-    "Netherlands Antilles", "Angola", "Antarctica", "Argentina", "American Samoa",
-    "Austria", "Australia", "Aruba", "Azerbaijan", "Bosnia and Herzegovina",
-    "Barbados", "Bangladesh", "Belgium", "Burkina Faso", "Bulgaria", "Bahrain",
-    "Burundi", "Benin", "Bermuda", "Brunei Darussalam", "Bolivia", "Brazil",
-    "Bahamas", "Bhutan", "Bouvet Island", "Botswana", "Belarus", "Belize",
-    "Canada", "Cocos (Keeling) Islands", "Congo, The Democratic Republic of the",
-    "Central African Republic", "Congo", "Switzerland", "Cote D'Ivoire", "Cook Islands",
-    "Chile", "Cameroon", "China", "Colombia", "Costa Rica", "Cuba", "Cape Verde",
-    "Christmas Island", "Cyprus", "Czech Republic", "Germany", "Djibouti",
-    "Denmark", "Dominica", "Dominican Republic", "Algeria", "Ecuador", "Estonia",
-    "Egypt", "Western Sahara", "Eritrea", "Spain", "Ethiopia", "Finland", "Fiji",
-    "Falkland Islands (Malvinas)", "Micronesia, Federated States of", "Faroe Islands",
-    "France", "France, Metropolitan", "Gabon", "United Kingdom",
-    "Grenada", "Georgia", "French Guiana", "Ghana", "Gibraltar", "Greenland",
-    "Gambia", "Guinea", "Guadeloupe", "Equatorial Guinea", "Greece", "South Georgia and the South Sandwich Islands",
-    "Guatemala", "Guam", "Guinea-Bissau",
-    "Guyana", "Hong Kong", "Heard Island and McDonald Islands", "Honduras",
-    "Croatia", "Haiti", "Hungary", "Indonesia", "Ireland", "Israel", "India",
-    "British Indian Ocean Territory", "Iraq", "Iran, Islamic Republic of",
-    "Iceland", "Italy", "Jamaica", "Jordan", "Japan", "Kenya", "Kyrgyzstan",
-    "Cambodia", "Kiribati", "Comoros", "Saint Kitts and Nevis", "Korea, Democratic People's Republic of",
-    "Korea, Republic of", "Kuwait", "Cayman Islands",
-    "Kazakstan", "Lao People's Democratic Republic", "Lebanon", "Saint Lucia",
-    "Liechtenstein", "Sri Lanka", "Liberia", "Lesotho", "Lithuania", "Luxembourg",
-    "Latvia", "Libyan Arab Jamahiriya", "Morocco", "Monaco", "Moldova, Republic of",
-    "Madagascar", "Marshall Islands", "Macedonia",
-    "Mali", "Myanmar", "Mongolia", "Macau", "Northern Mariana Islands",
-    "Martinique", "Mauritania", "Montserrat", "Malta", "Mauritius", "Maldives",
-    "Malawi", "Mexico", "Malaysia", "Mozambique", "Namibia", "New Caledonia",
-    "Niger", "Norfolk Island", "Nigeria", "Nicaragua", "Netherlands", "Norway",
-    "Nepal", "Nauru", "Niue", "New Zealand", "Oman", "Panama", "Peru", "French Polynesia",
-    "Papua New Guinea", "Philippines", "Pakistan", "Poland", "Saint Pierre and Miquelon",
-    "Pitcairn Islands", "Puerto Rico", "Palestinian Territory",
-    "Portugal", "Palau", "Paraguay", "Qatar", "Reunion", "Romania",
-    "Russian Federation", "Rwanda", "Saudi Arabia", "Solomon Islands",
-    "Seychelles", "Sudan", "Sweden", "Singapore", "Saint Helena", "Slovenia",
-    "Svalbard and Jan Mayen", "Slovakia", "Sierra Leone", "San Marino", "Senegal",
-    "Somalia", "Suriname", "Sao Tome and Principe", "El Salvador", "Syrian Arab Republic",
-    "Swaziland", "Turks and Caicos Islands", "Chad", "French Southern Territories",
-    "Togo", "Thailand", "Tajikistan", "Tokelau", "Turkmenistan",
-    "Tunisia", "Tonga", "Timor-Leste", "Turkey", "Trinidad and Tobago", "Tuvalu",
-    "Taiwan", "Tanzania, United Republic of", "Ukraine",
-    "Uganda", "United States Minor Outlying Islands", "United States", "Uruguay",
-    "Uzbekistan", "Holy See (Vatican City State)", "Saint Vincent and the Grenadines",
-    "Venezuela", "Virgin Islands, British", "Virgin Islands, U.S.",
-    "Vietnam", "Vanuatu", "Wallis and Futuna", "Samoa", "Yemen", "Mayotte",
-    "Serbia", "South Africa", "Zambia", "Montenegro", "Zimbabwe",
-    "Anonymous Proxy","Satellite Provider","Other",
-    "Aland Islands","Guernsey","Isle of Man","Jersey","Saint Barthelemy","Saint Martin"
-    ];
+  "", "Asia/Pacific Region", "Europe", "Andorra", "United Arab Emirates",
+  "Afghanistan", "Antigua and Barbuda", "Anguilla", "Albania", "Armenia",
+  "Netherlands Antilles", "Angola", "Antarctica", "Argentina", "American Samoa",
+  "Austria", "Australia", "Aruba", "Azerbaijan", "Bosnia and Herzegovina",
+  "Barbados", "Bangladesh", "Belgium", "Burkina Faso", "Bulgaria", "Bahrain",
+  "Burundi", "Benin", "Bermuda", "Brunei Darussalam", "Bolivia", "Brazil",
+  "Bahamas", "Bhutan", "Bouvet Island", "Botswana", "Belarus", "Belize",
+  "Canada", "Cocos (Keeling) Islands", "Congo, The Democratic Republic of the",
+  "Central African Republic", "Congo", "Switzerland", "Cote D'Ivoire", "Cook Islands",
+  "Chile", "Cameroon", "China", "Colombia", "Costa Rica", "Cuba", "Cape Verde",
+  "Christmas Island", "Cyprus", "Czech Republic", "Germany", "Djibouti",
+  "Denmark", "Dominica", "Dominican Republic", "Algeria", "Ecuador", "Estonia",
+  "Egypt", "Western Sahara", "Eritrea", "Spain", "Ethiopia", "Finland", "Fiji",
+  "Falkland Islands (Malvinas)", "Micronesia, Federated States of", "Faroe Islands",
+  "France", "France, Metropolitan", "Gabon", "United Kingdom",
+  "Grenada", "Georgia", "French Guiana", "Ghana", "Gibraltar", "Greenland",
+  "Gambia", "Guinea", "Guadeloupe", "Equatorial Guinea", "Greece", "South Georgia and the South Sandwich Islands",
+  "Guatemala", "Guam", "Guinea-Bissau",
+  "Guyana", "Hong Kong", "Heard Island and McDonald Islands", "Honduras",
+  "Croatia", "Haiti", "Hungary", "Indonesia", "Ireland", "Israel", "India",
+  "British Indian Ocean Territory", "Iraq", "Iran, Islamic Republic of",
+  "Iceland", "Italy", "Jamaica", "Jordan", "Japan", "Kenya", "Kyrgyzstan",
+  "Cambodia", "Kiribati", "Comoros", "Saint Kitts and Nevis", "Korea, Democratic People's Republic of",
+  "Korea, Republic of", "Kuwait", "Cayman Islands",
+  "Kazakstan", "Lao People's Democratic Republic", "Lebanon", "Saint Lucia",
+  "Liechtenstein", "Sri Lanka", "Liberia", "Lesotho", "Lithuania", "Luxembourg",
+  "Latvia", "Libyan Arab Jamahiriya", "Morocco", "Monaco", "Moldova, Republic of",
+  "Madagascar", "Marshall Islands", "Macedonia",
+  "Mali", "Myanmar", "Mongolia", "Macau", "Northern Mariana Islands",
+  "Martinique", "Mauritania", "Montserrat", "Malta", "Mauritius", "Maldives",
+  "Malawi", "Mexico", "Malaysia", "Mozambique", "Namibia", "New Caledonia",
+  "Niger", "Norfolk Island", "Nigeria", "Nicaragua", "Netherlands", "Norway",
+  "Nepal", "Nauru", "Niue", "New Zealand", "Oman", "Panama", "Peru", "French Polynesia",
+  "Papua New Guinea", "Philippines", "Pakistan", "Poland", "Saint Pierre and Miquelon",
+  "Pitcairn Islands", "Puerto Rico", "Palestinian Territory",
+  "Portugal", "Palau", "Paraguay", "Qatar", "Reunion", "Romania",
+  "Russian Federation", "Rwanda", "Saudi Arabia", "Solomon Islands",
+  "Seychelles", "Sudan", "Sweden", "Singapore", "Saint Helena", "Slovenia",
+  "Svalbard and Jan Mayen", "Slovakia", "Sierra Leone", "San Marino", "Senegal",
+  "Somalia", "Suriname", "Sao Tome and Principe", "El Salvador", "Syrian Arab Republic",
+  "Swaziland", "Turks and Caicos Islands", "Chad", "French Southern Territories",
+  "Togo", "Thailand", "Tajikistan", "Tokelau", "Turkmenistan",
+  "Tunisia", "Tonga", "Timor-Leste", "Turkey", "Trinidad and Tobago", "Tuvalu",
+  "Taiwan", "Tanzania, United Republic of", "Ukraine",
+  "Uganda", "United States Minor Outlying Islands", "United States", "Uruguay",
+  "Uzbekistan", "Holy See (Vatican City State)", "Saint Vincent and the Grenadines",
+  "Venezuela", "Virgin Islands, British", "Virgin Islands, U.S.",
+  "Vietnam", "Vanuatu", "Wallis and Futuna", "Samoa", "Yemen", "Mayotte",
+  "Serbia", "South Africa", "Zambia", "Montenegro", "Zimbabwe",
+  "Anonymous Proxy","Satellite Provider","Other",
+  "Aland Islands","Guernsey","Isle of Man","Jersey","Saint Barthelemy","Saint Martin"
+];
 
 var logged = false;
 
 var locationInfo = {
-    countryCode: 'pl'
+  countryCode: 'pl'
 }
 
 function initCountries() {
-  var countriesClone = COUNTRY_NAMES.slice()
-  countriesClone.sort().forEach(function(country){
-    var countryName = (country === '') ? 'All Countries' : country
-    jQuery('#search-country').append('<option value="' + country + '">' + countryName + '</option>')
-  })
+  var countriesClone = COUNTRY_NAMES.slice();
+  countriesClone.sort().forEach(function(country) {
+    var countryName = (country === '') ? 'All Countries' : country;
+    jQuery('#search-country').append('<option value="' + country + '">' + countryName + '</option>');
+  });
 }
 
-function updateInfo(val,own)
-{
-    var json = parseInt(val);
+function updateInfo(val, own) {
+  var json = parseInt(val);
+  json = HOMEPAGE_DATA[json];
 
-    json = HOMEPAGE_DATA[json];
+  jQuery('#info-price').html(json.temp_price + ' ' + json.currency);
 
-    jQuery('#info-price').html(json.temp_price+' '+json.currency);
+  if (own) {
+    jQuery('#info-info-equation').html(json.price_equation);
+  } else {
+    jQuery('#info-info-equation').html('-');
+  }
 
-    if(own)
-        jQuery('#info-info-equation').html(json.price_equation);
-    else
-        jQuery('#info-info-equation').html('-');
+  if (json.online_provider != null) {
+    jQuery('#info-payment').html(POVIDER_ONLINE[json.online_provider][0]);
+  } else {
+    jQuery('#info-payment').html('-');
+  }
 
-    if(json.online_provider != null)
-        jQuery('#info-payment').html(POVIDER_ONLINE[json.online_provider][0]);
-    else
-        jQuery('#info-payment').html('-');
-
-    jQuery('#info-user').html(json.profile.name);
-    jQuery('#info-limits').html(corect_trade_limits(json.min_amount,json.max_amount));
-    jQuery('#info-location').html(json.location_string);
-    jQuery('#info-user-short').html(json.profile.username);
+  jQuery('#info-user').html(json.profile.name);
+  jQuery('#info-limits').html(corect_trade_limits(json.min_amount, json.max_amount));
+  jQuery('#info-location').html(json.location_string);
+  jQuery('#info-user-short').html(json.profile.username);
 }
 
-function updateEditInfo(val_id)
-{
+function updateEditInfo(val_id) {
+  $('.alert').hide();
+
+  var json = HOMEPAGE_DATA[val_id];
+
+  jQuery('#edit-info-equation').val(json.price_equation);
+  jQuery('#edit-info-price').html(json.temp_price + ' ' + json.currency);
+
+  if (json.online_provider != null) {
+    jQuery('#edit-info-payment').html(POVIDER_ONLINE[json.online_provider][0]);
+  } else {
+    jQuery('#edit-info-payment').html('-');
+  }
+
+  if (json.visible) {
+    $('#edit-info-visible option:eq(1)').prop('selected', true);
+  }
+
+  jQuery('#edit-info-user').html(json.profile.name);
+  jQuery('#edit-info-min').val(corect_value(json.min_amount));
+  jQuery('#edit-info-max').val(corect_value(json.max_amount));
+  jQuery('#edit-info-location').html(json.location_string);
+  jQuery('#edit-info-user-short').html(json.profile.username);
+
+  jQuery('.save-info-btn').attr('id', 'sib-' + val_id);
+
+  $('.save-info-btn').unbind('click');
+  $('.save-info-btn').bind('click', function() {
     $('.alert').hide();
 
-    var json = HOMEPAGE_DATA[val_id];
+    var gtu = $(this).attr('id').substring(4);
 
-    jQuery('#edit-info-equation').val(json.price_equation);
-    jQuery('#edit-info-price').html(json.temp_price+' '+json.currency);
+    localbitcoins.request_post('/api/ad/' + gtu + '/', {
+      visible: ($('#edit-info-visible').val() == 'true'),
+      min_amount: corect_number(jQuery('#edit-info-min').val()),
+      max_amount: corect_number(jQuery('#edit-info-max').val()),
+      price_equation: jQuery('#edit-info-equation').val()
+    }, function(data, isError) {
+      if (isError) {
+        $("#edit-info-success").show().html(data.data.message);
+      } else {
+        var json = jQuery.parseJSON(data);
+        var sErrolList = "";
 
-    if(json.online_provider != null)
-        jQuery('#edit-info-payment').html(POVIDER_ONLINE[json.online_provider][0]);
-    else
-        jQuery('#edit-info-payment').html('-');
-
-    if(json.visible)
-        $('#edit-info-visible option:eq(1)').prop('selected', true);
-
-    jQuery('#edit-info-user').html(json.profile.name);
-    jQuery('#edit-info-min').val(corect_value(json.min_amount));
-    jQuery('#edit-info-max').val(corect_value(json.max_amount));
-    jQuery('#edit-info-location').html(json.location_string);
-    jQuery('#edit-info-user-short').html(json.profile.username);
-
-    jQuery('.save-info-btn').attr('id','sib-'+val_id);
-
-    $('.save-info-btn').unbind('click');
-    $('.save-info-btn').bind('click',function() {
-
-        $('.alert').hide();
-
-        var gtu = $(this).attr('id').substring(4);
-
-        localbitcoins.request_post('/api/ad/'+gtu+'/',{
-            visible:($('#edit-info-visible').val()=='true'),
-
-            min_amount:corect_number(jQuery('#edit-info-min').val()),
-            max_amount:corect_number(jQuery('#edit-info-max').val()),
-            price_equation:jQuery('#edit-info-equation').val()
-        },function(data,isError)
-        {
-
-            if(isError)
-            {
-                $("#edit-info-success").show().html(data.data.message);
-
-            }else{
-
-                var json = jQuery.parseJSON(data);
-
-                var sErrolList = "";
-
-                $.each(json.error.errors, function( key, val ) {
-                    sErrolList += "<div>"+key+":"+val+"</div>";
-                });
-
-                $("#edit-info-error").show().html(sErrolList);
-
-            }
-
+        $.each(json.error.errors, function(key, val) {
+          sErrolList += "<div>" + key + ":" + val + "</div>";
         });
 
+        $("#edit-info-error").show().html(sErrolList);
+      }
     });
-
+  });
 }
 
-function updateGraph(value)
-{
+function updateGraph(value) {
+  var json = EXCHENGE_BTN[value][1];
+  var commonTestData = [];
+  var iCounter = 0;
 
-    var json = EXCHENGE_BTN[value][1];
+  if (json.avg_1h != null) {
+    commonTestData[iCounter++] = [json.avg_1h, {label: '1h', color: '#E57536'}];
+  }
 
-    commonTestData = [];
+  if (json.avg_3h != null) {
+    commonTestData[iCounter++] = [json.avg_3h, {label: '3h', color: '#82293B'}];
+  }
 
-    var iCounter = 0;
+  if (json.avg_12h != null) {
+    commonTestData[iCounter++] = [json.avg_12h, {label: '12h', color: '#FFBE33'}];
+  }
 
-    if(json.avg_1h!=null)
-        commonTestData[iCounter++] =  [json.avg_1h, {label: '1h', color: '#E57536'}];
+  if (json.avg_24h != null) {
+    commonTestData[iCounter++] = [json.avg_24h, {label: '24h', color: '#476FB2'}];
+  }
 
-    if(json.avg_3h!=null)
-        commonTestData[iCounter++] =  [json.avg_3h, {label: '3h', color: '#82293B'}];
+  $('#defaults-graph').tufteBar({
+    data: commonTestData,
+    barLabel:  function(i) { return this[0] },
+    axisLabel: function(i) { return this[1].label },
+    barWidth:  function(i) { return 0.5 + (i % 2) * 0.2 },
+    color:     function(i) { return this[1].color }
+  });
 
-    if(json.avg_12h!=null)
-        commonTestData[iCounter++] =  [json.avg_12h, {label: '12h', color: '#FFBE33'}];
+  $('#rates-last').html(json.rates.last);
+  $('#volume-btc').html(json.volume_btc);
 
-    if(json.avg_24h!=null)
-        commonTestData[iCounter++] =  [json.avg_24h, {label: '24h', color: '#476FB2'}];
+  var buyContiner = $('#trades-continer').find('tbody');
+  buyContiner.children().first().nextAll().remove();
 
-    $('#defaults-graph').tufteBar({
-      data: commonTestData,
-      barLabel:  function(i) { return this[0] },
-      axisLabel: function(i) { return this[1].label },
-      barWidth:  function(i) { return 0.5 + (i % 2) * 0.2 },
-      color:     function(i) { return this[1].color }
+  localbitcoins.trades(EXCHENGE_BTN[value][0], function(data) {
+    $.each(data, function(key, val) {
+      var d1 = new Date(val.date);
+      var min = d1.getMinutes();
+
+      if (min < 10) {
+        min = '0' + min;
+      }
+
+      var data_i_czas = d1.getDate() + ' ' + d1.getMonth() + ' ' + d1.getFullYear() + ', ' +
+        d1.getHours() + ':' + min;
+
+      buyContiner.append('<tr><td>' + val.amount + '</td><td>' + val.price + '</td><td>' +
+        data_i_czas + '</td></tr>');
     });
-
-    $('#rates-last').html(json.rates.last);
-    $('#volume-btc').html(json.volume_btc);
-
-    var buyContiner = $('#trades-continer').find('tbody');
-    buyContiner.children().first().nextAll().remove();
-
-    localbitcoins.trades(EXCHENGE_BTN[value][0], function(data) {
-        $.each(data, function( key, val ) {
-            var d1 = new Date(val.date);
-
-            var min = d1.getMinutes();
-
-            if (min < 10)
-                min = '0' + min;
-
-            var data_i_czas = d1.getDate() + ' ' + d1.getMonth() + ' ' + d1.getFullYear() + ', ' + d1.getHours() + ':' + min;
-
-            buyContiner.append('<tr><td>'+val.amount+'</td><td>'+val.price+'</td><td>'+data_i_czas+'</td></tr>');
-        });
-
-    });
-
-
+  });
 }
 
-function InitLocalization()
-{
+function initLocalization() {
     $('#main-page').show();
     /* TODO get location from Hive
     wait(true);
@@ -264,360 +252,342 @@ function InitLocalization()
     }else{
         InitLocalbitcoins(false);
     }*/
-    InitLocalbitcoins(false);
+    initLocalbitcoins(false);
 }
 
-function findBuyBitcoinsOnlice(countryName,paymentMethod,buyContinerObject) {
-  findBitcoinDealsOnlice("buy", countryName, paymentMethod, buyContinerObject)
+function findBuyBitcoinsOnlice(countryName, paymentMethod, buyContinerObject) {
+  findBitcoinDealsOnlice("buy", countryName, paymentMethod, buyContinerObject);
 }
 
-function findSellBitcoinsOnlice(countryName,paymentMethod,buyContinerObject) {
-  findBitcoinDealsOnlice("sell", countryName, paymentMethod, buyContinerObject)
+function findSellBitcoinsOnlice(countryName, paymentMethod, buyContinerObject) {
+  findBitcoinDealsOnlice("sell", countryName, paymentMethod, buyContinerObject);
 }
 
-function findBitcoinDealsOnlice(type, countryName,paymentMethod,buyContinerObject) {
-    $('#search-result-buy').hide();
-    $('#search-result-sell').hide();
-    wait(true)
-    var urlNode = '/' + type + '-bitcoins-online';
+function findBitcoinDealsOnlice(type, countryName, paymentMethod, buyContinerObject) {
+  $('#search-result-buy').hide();
+  $('#search-result-sell').hide();
+  wait(true);
 
-    if(countryName != '' && countryName != null) {
-      var countryCode = COUNTRY_CODES[COUNTRY_NAMES.indexOf(countryName)]
-      urlNode += '/' + countryCode + '/' + countryName.toLowerCase();
-    }
+  var urlNode = '/' + type + '-bitcoins-online';
 
-    if(paymentMethod != '' && paymentMethod != null) {
-        urlNode += '/'+paymentMethod;
-    }
+  if (countryName != '' && countryName != null) {
+    var countryCode = COUNTRY_CODES[COUNTRY_NAMES.indexOf(countryName)];
+    urlNode += '/' + countryCode + '/' + countryName.toLowerCase();
+  }
 
-    urlNode += '/.json';
+  if (paymentMethod != '' && paymentMethod != null) {
+    urlNode += '/' + paymentMethod;
+  }
 
-    localbitcoins.request_get(urlNode,{},function(data) {
-        var buyContiner = buyContinerObject.find('tbody');
+  urlNode += '/.json';
 
-        buyContiner.children().first().nextAll().remove();
+  localbitcoins.request_get(urlNode, {}, function(data) {
+    var buyContiner = buyContinerObject.find('tbody');
+    buyContiner.children().first().nextAll().remove();
 
-        $.each(data.data.ad_list, function( key, val ) {
-            buyContiner.append('<tr><td><a class="user-detalis" href="'+val.data.profile.username+'">'+val.data.profile.name+'</a></td><td>'+val.data.temp_price+' '+val.data.currency+'</td><td><button class="info-btn" id="iid-'+val.data.ad_id+'">info</button></td></tr>');
-            HOMEPAGE_DATA[val.data.ad_id] = val.data;
-        });
+    $.each(data.data.ad_list, function(key, val) {
+      buyContiner.append('<tr><td><a class="user-detalis" href="' + val.data.profile.username + '">' +
+        val.data.profile.name + '</a></td><td>' + val.data.temp_price + ' ' + val.data.currency +
+        '</td><td><button class="info-btn" id="iid-' + val.data.ad_id + '">info</button></td></tr>');
 
-        $('.info-btn').unbind('click');
-        $('.info-btn').bind('click',function() {
-
-            var gtu = $(this).attr('id').substring(4);
-            $('.page').hide();
-            $('#info-page').show();
-
-            updateInfo(gtu,false);
-        });
-
-        $('.user-detalis').unbind('click');
-        $('.user-detalis').bind('click',function() {
-
-            var gtu = $(this).attr('href');
-            $('.page').hide();
-            $('#info-user-detalis').show();
-
-            $('#uid-un').html(gtu);
-
-            localbitcoins.account(gtu, function(data) {
-                $('#uid-tpc').html(data.data.trading_partners_count);
-                $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
-                $('#uid-tvt').html(data.data.trade_volume_text);
-                $('#uid-tbc').html(data.data.blocked_count);
-                $('#uid-fc').html(data.data.feedback_count);
-                $('#uid-tc').html(data.data.trusted_count);
-            });
-            return false;
-        });
-
-        $('#search-result-' + type).show();
-        wait(false)
-    });
-}
-
-function wait(tn)
-{
-    if(tn && $('#loading-page').css('display') == 'none') {
-        $('#loading-page').show();
-    }else{
-        $('#loading-page').hide();
-    }
-}
-
-function corect_number(va)
-{
-    var nr = 0;
-
-    try
-    {
-        var tmp = parseFloat(va);
-        nr = Math.ceil(tmp);
-    }catch(err){}
-
-    return nr;
-}
-
-
-function corect_value(va)
-{
-    if(va=='None')
-        return "";
-    return va;
-}
-
-function corect_trade_limits(mint,maxt)
-{
-    if(mint=='None' && maxt=='None')
-        return "Not set";
-
-    if(mint=='None')
-        return "Max: "+maxt;
-
-    if(maxt=='None')
-        return "Min: "+mint;
-
-    return mint+" - "+maxt;
-}
-
-function refresh_account()
-{
-    wait(true);
-
-    $('.page').hide();
-    $('#user-page').show();
-
-    localbitcoins.myself(function(data) {
-        $('#myself-tpc').html(data.data.trading_partners_count);
-        $('#myself-fuc').html(data.data.feedbacks_unconfirmed_count);
-        $('#myself-tvt').html(data.data.trade_volume_text);
-        $('#myself-tbc').html(data.data.blocked_count);
-        $('#myself-fc').html(data.data.feedback_count);
-        $('#myself-tc').html(data.data.trusted_count);
-    });
-
-    localbitcoins.ads(function(data) {
-        var buyContiner = $('#user-ads-continer').find('tbody');
-        buyContiner.children().first().nextAll().remove();
-        $.each(data.data.ad_list, function( key, val ) {
-            buyContiner.append('<tr><td>'+val.data.visible+'</td><td>'+val.data.temp_price+' '+val.data.currency+'</td><td>'+corect_trade_limits(val.data.min_amount,val.data.max_amount)+'</td><td><button class="info-btn" id="iid-'+val.data.ad_id+'">info</button><button class="edit-btn" id="iid-'+val.data.ad_id+'">edit</button></td></tr>');
-            HOMEPAGE_DATA[val.data.ad_id] = val.data;
-        });
-    });
-
-    localbitcoins.escrows(function(data) {
-        var buyContiner = $('#user-escrow-continer').find('tbody');
-        buyContiner.children().first().nextAll().remove();
-
-        $.each(data.data.escrow_list, function( key, val ) {
-            buyContiner.append('<tr><td>'+val.data.buyer_username+'</td><td>'+val.data.amount+'</td><td>'+val.data.amount_btc+'</td><td><button class="release-btn" id="eid-'+val.actions.release_url+'">release</button></td></tr>');
-            HOMEPAGE_DATA[val.data.ad_id] = val.data;
-        });
-
+      HOMEPAGE_DATA[val.data.ad_id] = val.data;
     });
 
     $('.info-btn').unbind('click');
-    $('.info-btn').bind('click',function() {
+    $('.info-btn').bind('click', function() {
+      var gtu = $(this).attr('id').substring(4);
+      $('.page').hide();
+      $('#info-page').show();
 
-        var gtu = $(this).attr('id').substring(4);
-        $('.page').hide();
-        $('#info-page').show();
-
-        updateInfo(gtu,true);
-    });
-
-    $('.edit-btn').unbind('click');
-    $('.edit-btn').bind('click',function() {
-
-        var gtu = $(this).attr('id').substring(4);
-        $('.page').hide();
-        $('#edit-info-page').show();
-
-        updateEditInfo(gtu);
-    });
-
-    $('.release-btn').unbind('click');
-    $('.release-btn').bind('click',function() {
-
-        var gtu = $(this).attr('id').substring(4);
-
-        localbitcoins.request_post(gtu,{},function(data)
-        {
-
-        });
-
-    });
-
-    wait(false);
-
-}
-
-
-function refresh_homepage()
-{
-    wait(true);
-
-    if(locationInfo.countryName) {
-      findSellBitcoinsOnlice(locationInfo.countryName,null,$("#sell-bitcoins"));
-      findBuyBitcoinsOnlice(locationInfo.countryName,null,$("#buy-bitcoins"));
-    } else {
-      $('#main-result').hide();
-    }
-
-    $('.info-btn').unbind('click');
-    $('.info-btn').bind('click',function() {
-        var gtu = $(this).attr('id').substring(4);
-        $('.page').hide();
-        $('#info-page').show();
-
-        updateInfo(gtu,false);
+      updateInfo(gtu, false);
     });
 
     $('.user-detalis').unbind('click');
-    $('.user-detalis').bind('click',function() {
+    $('.user-detalis').bind('click', function() {
+      var gtu = $(this).attr('href');
+      $('.page').hide();
+      $('#info-user-detalis').show();
 
-        var gtu = $(this).attr('href');
-        $('.page').hide();
-        $('#info-user-detalis').show();
+      $('#uid-un').html(gtu);
 
-        $('#uid-un').html(gtu);
+      localbitcoins.account(gtu, function(data) {
+        $('#uid-tpc').html(data.data.trading_partners_count);
+        $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
+        $('#uid-tvt').html(data.data.trade_volume_text);
+        $('#uid-tbc').html(data.data.blocked_count);
+        $('#uid-fc').html(data.data.feedback_count);
+        $('#uid-tc').html(data.data.trusted_count);
+      });
 
-        localbitcoins.account(gtu, function(data) {
-            $('#uid-tpc').html(data.data.trading_partners_count);
-            $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
-            $('#uid-tvt').html(data.data.trade_volume_text);
-            $('#uid-tbc').html(data.data.blocked_count);
-            $('#uid-fc').html(data.data.feedback_count);
-            $('#uid-tc').html(data.data.trusted_count);
-        });
-        return false;
+      return false;
     });
 
-
-    wait(false);
-
+    $('#search-result-' + type).show();
+    wait(false)
+  });
 }
 
-function InitLocalbitcoins(tn)
-{
-    if(tn)
-    {
-        refresh_homepage();
-    }else{
-        $('#main-result').hide();
+function wait(tn) {
+  if (tn && $('#loading-page').css('display') == 'none') {
+    $('#loading-page').show();
+  } else {
+    $('#loading-page').hide();
+  }
+}
+
+function corect_number(va) {
+  var nr = 0;
+
+  try {
+    var tmp = parseFloat(va);
+    nr = Math.ceil(tmp);
+  } catch(err) {}
+
+  return nr;
+}
+
+function corect_value(va) {
+  if (va == 'None') {
+    return "";
+  }
+
+  return va;
+}
+
+function corect_trade_limits(mint, maxt) {
+  if (mint == 'None' && maxt == 'None') {
+    return "Not set";
+  }
+
+  if (mint == 'None') {
+    return "Max: " + maxt;
+  }
+
+  if (maxt == 'None') {
+    return "Min: " + mint;
+  }
+
+  return mint + " - " + maxt;
+}
+
+function refresh_account() {
+  wait(true);
+
+  $('.page').hide();
+  $('#user-page').show();
+
+  localbitcoins.myself(function(data) {
+    $('#myself-tpc').html(data.data.trading_partners_count);
+    $('#myself-fuc').html(data.data.feedbacks_unconfirmed_count);
+    $('#myself-tvt').html(data.data.trade_volume_text);
+    $('#myself-tbc').html(data.data.blocked_count);
+    $('#myself-fc').html(data.data.feedback_count);
+    $('#myself-tc').html(data.data.trusted_count);
+  });
+
+  localbitcoins.ads(function(data) {
+    var buyContiner = $('#user-ads-continer').find('tbody');
+    buyContiner.children().first().nextAll().remove();
+
+    $.each(data.data.ad_list, function(key, val) {
+      buyContiner.append('<tr><td>' + val.data.visible + '</td><td>' + val.data.temp_price +
+        ' ' + val.data.currency + '</td><td>' + corect_trade_limits(val.data.min_amount, val.data.max_amount) +
+        '</td><td><button class="info-btn" id="iid-' + val.data.ad_id +
+        '">info</button><button class="edit-btn" id="iid-' + val.data.ad_id + '">edit</button></td></tr>');
+
+      HOMEPAGE_DATA[val.data.ad_id] = val.data;
+    });
+  });
+
+  localbitcoins.escrows(function(data) {
+    var buyContiner = $('#user-escrow-continer').find('tbody');
+    buyContiner.children().first().nextAll().remove();
+
+    $.each(data.data.escrow_list, function(key, val) {
+      buyContiner.append('<tr><td>' + val.data.buyer_username + '</td><td>' + val.data.amount + '</td><td>' +
+        val.data.amount_btc + '</td><td><button class="release-btn" id="eid-' + val.actions.release_url +
+        '">release</button></td></tr>');
+
+      HOMEPAGE_DATA[val.data.ad_id] = val.data;
+    });
+  });
+
+  $('.info-btn').unbind('click');
+  $('.info-btn').bind('click', function() {
+    var gtu = $(this).attr('id').substring(4);
+    $('.page').hide();
+    $('#info-page').show();
+
+    updateInfo(gtu, true);
+  });
+
+  $('.edit-btn').unbind('click');
+  $('.edit-btn').bind('click', function() {
+    var gtu = $(this).attr('id').substring(4);
+    $('.page').hide();
+    $('#edit-info-page').show();
+
+    updateEditInfo(gtu);
+  });
+
+  $('.release-btn').unbind('click');
+  $('.release-btn').bind('click', function() {
+    var gtu = $(this).attr('id').substring(4);
+
+    localbitcoins.request_post(gtu, {}, function(data) {});
+  });
+
+  wait(false);
+}
+
+function refresh_homepage() {
+  wait(true);
+
+  if (locationInfo.countryName) {
+    findSellBitcoinsOnlice(locationInfo.countryName, null, $("#sell-bitcoins"));
+    findBuyBitcoinsOnlice(locationInfo.countryName, null, $("#buy-bitcoins"));
+  } else {
+    $('#main-result').hide();
+  }
+
+  $('.info-btn').unbind('click');
+  $('.info-btn').bind('click', function() {
+    var gtu = $(this).attr('id').substring(4);
+    $('.page').hide();
+    $('#info-page').show();
+
+    updateInfo(gtu, false);
+  });
+
+  $('.user-detalis').unbind('click');
+  $('.user-detalis').bind('click', function() {
+    var gtu = $(this).attr('href');
+    $('.page').hide();
+    $('#info-user-detalis').show();
+    $('#uid-un').html(gtu);
+
+    localbitcoins.account(gtu, function(data) {
+      $('#uid-tpc').html(data.data.trading_partners_count);
+      $('#uid-fuc').html(data.data.feedbacks_unconfirmed_count);
+      $('#uid-tvt').html(data.data.trade_volume_text);
+      $('#uid-tbc').html(data.data.blocked_count);
+      $('#uid-fc').html(data.data.feedback_count);
+      $('#uid-tc').html(data.data.trusted_count);
+    });
+
+    return false;
+  });
+
+  wait(false);
+}
+
+function initLocalbitcoins(tn) {
+  if (tn) {
+    refresh_homepage();
+  } else {
+    $('#main-result').hide();
+  }
+
+  localbitcoins.payment_methods(function(data) {
+    var pm = $('#paymend-method');
+
+    $.each(data.data.methods, function(key, val) {
+      pm.append('<option value="' + val.code + '">' + val.name + '</option>');
+      POVIDER_ONLINE[val.code] = [val.name, key];
+    });
+  });
+
+  wait(false);
+
+  $('.more-btn').click(function() {
+    $(this).hide().parents('.continer-section').find('.list-continer').removeClass('short-list');
+    $(this).parent().children().eq(1).show();
+  });
+
+  $('.less-btn').click(function() {
+    $(this).hide().parents('.continer-section').find('.list-continer').addClass('short-list');
+    $(this).parent().children().eq(0).show();
+  });
+
+  $('#home-btn').click(function() {
+    $('.page').hide();
+    $('#main-page').show();
+    refresh_homepage();
+  });
+
+  $('#exchcenge-select').change(function() {
+    updateGraph($(this).val());
+  });
+
+  $('#exchange-btn').click(function() {
+    $('.page').hide();
+    $('#exchange-page').show();
+
+    localbitcoins.ticker(function(data) {
+      var pm = $('#exchcenge-select');
+      var iCounter = 0;
+
+      $.each(data, function(key, val) {
+        pm.append('<option value="' + iCounter + '">' + key + '</option>');
+        EXCHENGE_BTN[iCounter++] = [key, val];
+      });
+
+      updateGraph(0);
+    });
+  });
+
+  $('#login-btn').click(function() {
+    $('.alert').hide();
+
+    if (logged) {
+      refresh_account();
+      return false;
+    } else {
+      $('.page').hide();
+      $('#login-page').show();
     }
+  });
 
-    localbitcoins.payment_methods(function(data) {
-        var pm = $('#paymend-method');
+  $('#auth-btn').click(function() {
+    $('.alert').hide();
 
-        $.each(data.data.methods, function( key, val ) {
-            pm.append('<option value="'+val.code+'">'+val.name+'</option>');
-            POVIDER_ONLINE[val.code] = [val.name, key];
-        });
-
-    });
-    wait(false);
-    $('.more-btn').click(function() {
-        $(this).hide().parents('.continer-section').find('.list-continer').removeClass('short-list');
-        $(this).parent().children().eq(1).show();
-    });
-
-    $('.less-btn').click(function() {
-        $(this).hide().parents('.continer-section').find('.list-continer').addClass('short-list');
-        $(this).parent().children().eq(0).show();
-    });
-
-    $('#home-btn').click(function() {
-        $('.page').hide();
-        $('#main-page').show();
-        refresh_homepage();
-    });
-
-
-    $('#exchcenge-select').change(function() {
-        updateGraph($(this).val());
-    });
-
-    $('#exchange-btn').click(function() {
-        $('.page').hide();
-        $('#exchange-page').show();
-
-        localbitcoins.ticker(function(data) {
-            var pm = $('#exchcenge-select');
-
-            var iCounter = 0;
-
-            $.each(data, function( key, val ) {
-                pm.append('<option value="'+iCounter+'">'+key+'</option>');
-
-                EXCHENGE_BTN[iCounter++] = [key,val];
-
-            });
-
-            updateGraph(0);
-
-        });
-
-
-    });
-
-
-
-    $('#login-btn').click(function() {
-        $('.alert').hide();
-        if(logged)
-        {
-            refresh_account();
-            return false;
-        }else{
-            $('.page').hide();
-            $('#login-page').show();
-        }
-    });
-
-    $('#auth-btn').click(function() {
-
-      $('.alert').hide();
-
-      var success = function(data) {
-        if (data.error) {
-          $("#login-error").show().html('Invalid username or password');
-        }else{
-          logged = true;
-          $('#login-btn').html('account');
-          refresh_account();
-        }
-
-        wait(false);
-      }
-
-      var error = function(xhr, ajaxOptions, thrownError) {
+    var success = function(data) {
+      if (data.error) {
         $("#login-error").show().html('Invalid username or password');
-        wait(false);
+      } else {
+        logged = true;
+        $('#login-btn').html('account');
+        refresh_account();
       }
 
-      wait(true);
-      localbitcoins.login($('#login-name').val(), $('#login-password').val(), success, error)
-    });
+      wait(false);
+    };
 
-    $('#search-btn').click(function() {
+    var error = function(xhr, ajaxOptions, thrownError) {
+      $("#login-error").show().html('Invalid username or password');
+      wait(false);
+    };
 
-        var buy_boolean = $('#id-whattodo').prop('checked');
-        var buy_cach = false;
+    wait(true);
 
-        var country_name = $('#search-country').val();
+    localbitcoins.login($('#login-name').val(), $('#login-password').val(), success, error);
+  });
 
-        var payment_method = $('#paymend-method').parent().val();
+  $('#search-btn').click(function() {
+    var buy_boolean = $('#id-whattodo').prop('checked');
+    var buy_cach = false;
 
-        if (payment_method != '')
-            payment_method = POVIDER_ONLINE[payment_method][1];
+    var country_name = $('#search-country').val();
+    var payment_method = $('#paymend-method').parent().val();
 
-        if(!buy_boolean) {
-            findSellBitcoinsOnlice(country_name,payment_method,$("#result-sell-bitcoins"));
-        }else{
-            findBuyBitcoinsOnlice(country_name,payment_method,$("#result-buy-bitcoins"));
-        }
-    });
+    if (payment_method != '') {
+      payment_method = POVIDER_ONLINE[payment_method][1];
+    }
+            
+    if (!buy_boolean) {
+      findSellBitcoinsOnlice(country_name,payment_method, $("#result-sell-bitcoins"));
+    } else {
+      findBuyBitcoinsOnlice(country_name,payment_method, $("#result-buy-bitcoins"));
+    }
+  });
 }
-
