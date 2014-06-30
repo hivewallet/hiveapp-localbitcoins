@@ -88,7 +88,7 @@
   margin:20px 0px;
 }
 
-.continer-section
+.container-section
 {
   margin:10px;
 }
@@ -178,7 +178,7 @@
   line-height:25px;
 }
 
-#search div:last-child,.continer-section > div:last-child,#login-page div:last-child
+#search div:last-child,.container-section > div:last-child,#login-page div:last-child
 {
   text-align:center;
 }
@@ -188,18 +188,18 @@
   display: none;
 }
 
-.list-continer table > tbody > tr > td:first-child
+.list-container table > tbody > tr > td:first-child
 {
   color:#1c6ebf;
 }
 
-.list-continer table > tbody > tr > td
+.list-container table > tbody > tr > td
 {
   color:#008000;
   font-weight:bold;
 }
 
-.list-continer button,.continer-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn,#home-btn
+.list-container button,.container-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn,#home-btn
 {
   font-weight:bold;
   color:#fff; 
@@ -208,28 +208,28 @@
   margin:5px;
 }
 
-.list-continer button,#search button,#auth-btn,#exchange-btn
+.list-container button,#search button,#auth-btn,#exchange-btn
 {
   background-color:#1c6ebf;
 }
 
-.continer-section > div:last-child > button,#search,#login-form,#login-btn
+.container-section > div:last-child > button,#search,#login-form,#login-btn
 {
   background-color:#f58220;
 }
 
-.list-continer button:hover,#search button:hover,#auth-btn,#exchange-btn:hover
+.list-container button:hover,#search button:hover,#auth-btn,#exchange-btn:hover
 {
   background-color:#165da3;
 }
 
-.continer-section > div:last-child > button:hover,#login-btn:hover
+.container-section > div:last-child > button:hover,#login-btn:hover
 {
   background-color:#d26a20;
 }
 
 
-.list-continer button,.continer-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn
+.list-container button,.container-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn
 {
   padding:3px 30px;
 }

@@ -11,8 +11,8 @@ jQuery(document).ready(function() {
   initLocalization();
 });
 
-var POVIDER_ONLINE = [];
-var EXCHENGE_BTN = [];
+var PROVIDER_ONLINE = [];
+var EXCHANGE_BTN = [];
 var HOMEPAGE_DATA = [];
 var COUNTRY_CODES = [
   "", "AP", "EU", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AN", "AO", "AQ",
@@ -118,13 +118,13 @@ function updateInfo(val, own) {
   }
 
   if (json.online_provider != null) {
-    jQuery('#info-payment').html(POVIDER_ONLINE[json.online_provider][0]);
+    jQuery('#info-payment').html(PROVIDER_ONLINE[json.online_provider][0]);
   } else {
     jQuery('#info-payment').html('-');
   }
 
   jQuery('#info-user').html(json.profile.name);
-  jQuery('#info-limits').html(corect_trade_limits(json.min_amount, json.max_amount));
+  jQuery('#info-limits').html(correct_trade_limits(json.min_amount, json.max_amount));
   jQuery('#info-location').html(json.location_string);
   jQuery('#info-user-short').html(json.profile.username);
 }
@@ -138,7 +138,7 @@ function updateEditInfo(val_id) {
   jQuery('#edit-info-price').html(json.temp_price + ' ' + json.currency);
 
   if (json.online_provider != null) {
-    jQuery('#edit-info-payment').html(POVIDER_ONLINE[json.online_provider][0]);
+    jQuery('#edit-info-payment').html(PROVIDER_ONLINE[json.online_provider][0]);
   } else {
     jQuery('#edit-info-payment').html('-');
   }
@@ -148,8 +148,8 @@ function updateEditInfo(val_id) {
   }
 
   jQuery('#edit-info-user').html(json.profile.name);
-  jQuery('#edit-info-min').val(corect_value(json.min_amount));
-  jQuery('#edit-info-max').val(corect_value(json.max_amount));
+  jQuery('#edit-info-min').val(correct_value(json.min_amount));
+  jQuery('#edit-info-max').val(correct_value(json.max_amount));
   jQuery('#edit-info-location').html(json.location_string);
   jQuery('#edit-info-user-short').html(json.profile.username);
 
@@ -163,28 +163,28 @@ function updateEditInfo(val_id) {
 
     localbitcoins.request_post('/api/ad/' + gtu + '/', {
       visible: ($('#edit-info-visible').val() == 'true'),
-      min_amount: corect_number(jQuery('#edit-info-min').val()),
-      max_amount: corect_number(jQuery('#edit-info-max').val()),
+      min_amount: correct_number(jQuery('#edit-info-min').val()),
+      max_amount: correct_number(jQuery('#edit-info-max').val()),
       price_equation: jQuery('#edit-info-equation').val()
     }, function(data, isError) {
       if (isError) {
         $("#edit-info-success").show().html(data.data.message);
       } else {
         var json = jQuery.parseJSON(data);
-        var sErrolList = "";
+        var sErrorList = "";
 
         $.each(json.error.errors, function(key, val) {
-          sErrolList += "<div>" + key + ":" + val + "</div>";
+          sErrorList += "<div>" + key + ":" + val + "</div>";
         });
 
-        $("#edit-info-error").show().html(sErrolList);
+        $("#edit-info-error").show().html(sErrorList);
       }
     });
   });
 }
 
 function updateGraph(value) {
-  var json = EXCHENGE_BTN[value][1];
+  var json = EXCHANGE_BTN[value][1];
   var commonTestData = [];
   var iCounter = 0;
 
@@ -215,10 +215,10 @@ function updateGraph(value) {
   $('#rates-last').html(json.rates.last);
   $('#volume-btc').html(json.volume_btc);
 
-  var buyContiner = $('#trades-continer').find('tbody');
-  buyContiner.children().first().nextAll().remove();
+  var buyContainer = $('#trades-container').find('tbody');
+  buyContainer.children().first().nextAll().remove();
 
-  localbitcoins.trades(EXCHENGE_BTN[value][0], function(data) {
+  localbitcoins.trades(EXCHANGE_BTN[value][0], function(data) {
     $.each(data, function(key, val) {
       var d1 = new Date(val.date);
       var min = d1.getMinutes();
@@ -227,11 +227,11 @@ function updateGraph(value) {
         min = '0' + min;
       }
 
-      var data_i_czas = d1.getDate() + ' ' + d1.getMonth() + ' ' + d1.getFullYear() + ', ' +
+      var dateAndTime = d1.getDate() + ' ' + d1.getMonth() + ' ' + d1.getFullYear() + ', ' +
         d1.getHours() + ':' + min;
 
-      buyContiner.append('<tr><td>' + val.amount + '</td><td>' + val.price + '</td><td>' +
-        data_i_czas + '</td></tr>');
+      buyContainer.append('<tr><td>' + val.amount + '</td><td>' + val.price + '</td><td>' +
+        dateAndTime + '</td></tr>');
     });
   });
 }
@@ -255,15 +255,15 @@ function initLocalization() {
     initLocalbitcoins(false);
 }
 
-function findBuyBitcoinsOnlice(countryName, paymentMethod, buyContinerObject) {
-  findBitcoinDealsOnlice("buy", countryName, paymentMethod, buyContinerObject);
+function findBuyBitcoinsOnline(countryName, paymentMethod, buyContainerObject) {
+  findBitcoinDealsOnline("buy", countryName, paymentMethod, buyContainerObject);
 }
 
-function findSellBitcoinsOnlice(countryName, paymentMethod, buyContinerObject) {
-  findBitcoinDealsOnlice("sell", countryName, paymentMethod, buyContinerObject);
+function findSellBitcoinsOnline(countryName, paymentMethod, buyContainerObject) {
+  findBitcoinDealsOnline("sell", countryName, paymentMethod, buyContainerObject);
 }
 
-function findBitcoinDealsOnlice(type, countryName, paymentMethod, buyContinerObject) {
+function findBitcoinDealsOnline(type, countryName, paymentMethod, buyContainerObject) {
   $('#search-result-buy').hide();
   $('#search-result-sell').hide();
   wait(true);
@@ -282,11 +282,11 @@ function findBitcoinDealsOnlice(type, countryName, paymentMethod, buyContinerObj
   urlNode += '/.json';
 
   localbitcoins.request_get(urlNode, {}, function(data) {
-    var buyContiner = buyContinerObject.find('tbody');
-    buyContiner.children().first().nextAll().remove();
+    var buyContainer = buyContainerObject.find('tbody');
+    buyContainer.children().first().nextAll().remove();
 
     $.each(data.data.ad_list, function(key, val) {
-      buyContiner.append('<tr><td><a class="user-detalis" href="' + val.data.profile.username + '">' +
+      buyContainer.append('<tr><td><a class="user-details" href="' + val.data.profile.username + '">' +
         val.data.profile.name + '</a></td><td>' + val.data.temp_price + ' ' + val.data.currency +
         '</td><td><button class="info-btn" id="iid-' + val.data.ad_id + '">info</button></td></tr>');
 
@@ -302,11 +302,11 @@ function findBitcoinDealsOnlice(type, countryName, paymentMethod, buyContinerObj
       updateInfo(gtu, false);
     });
 
-    $('.user-detalis').unbind('click');
-    $('.user-detalis').bind('click', function() {
+    $('.user-details').unbind('click');
+    $('.user-details').bind('click', function() {
       var gtu = $(this).attr('href');
       $('.page').hide();
-      $('#info-user-detalis').show();
+      $('#info-user-details').show();
 
       $('#uid-un').html(gtu);
 
@@ -335,7 +335,7 @@ function wait(tn) {
   }
 }
 
-function corect_number(va) {
+function correct_number(va) {
   var nr = 0;
 
   try {
@@ -346,7 +346,7 @@ function corect_number(va) {
   return nr;
 }
 
-function corect_value(va) {
+function correct_value(va) {
   if (va == 'None') {
     return "";
   }
@@ -354,7 +354,7 @@ function corect_value(va) {
   return va;
 }
 
-function corect_trade_limits(mint, maxt) {
+function correct_trade_limits(mint, maxt) {
   if (mint == 'None' && maxt == 'None') {
     return "Not set";
   }
@@ -386,12 +386,12 @@ function refresh_account() {
   });
 
   localbitcoins.ads(function(data) {
-    var buyContiner = $('#user-ads-continer').find('tbody');
-    buyContiner.children().first().nextAll().remove();
+    var buyContainer = $('#user-ads-container').find('tbody');
+    buyContainer.children().first().nextAll().remove();
 
     $.each(data.data.ad_list, function(key, val) {
-      buyContiner.append('<tr><td>' + val.data.visible + '</td><td>' + val.data.temp_price +
-        ' ' + val.data.currency + '</td><td>' + corect_trade_limits(val.data.min_amount, val.data.max_amount) +
+      buyContainer.append('<tr><td>' + val.data.visible + '</td><td>' + val.data.temp_price +
+        ' ' + val.data.currency + '</td><td>' + correct_trade_limits(val.data.min_amount, val.data.max_amount) +
         '</td><td><button class="info-btn" id="iid-' + val.data.ad_id +
         '">info</button><button class="edit-btn" id="iid-' + val.data.ad_id + '">edit</button></td></tr>');
 
@@ -400,11 +400,11 @@ function refresh_account() {
   });
 
   localbitcoins.escrows(function(data) {
-    var buyContiner = $('#user-escrow-continer').find('tbody');
-    buyContiner.children().first().nextAll().remove();
+    var buyContainer = $('#user-escrow-container').find('tbody');
+    buyContainer.children().first().nextAll().remove();
 
     $.each(data.data.escrow_list, function(key, val) {
-      buyContiner.append('<tr><td>' + val.data.buyer_username + '</td><td>' + val.data.amount + '</td><td>' +
+      buyContainer.append('<tr><td>' + val.data.buyer_username + '</td><td>' + val.data.amount + '</td><td>' +
         val.data.amount_btc + '</td><td><button class="release-btn" id="eid-' + val.actions.release_url +
         '">release</button></td></tr>');
 
@@ -444,8 +444,8 @@ function refresh_homepage() {
   wait(true);
 
   if (locationInfo.countryName) {
-    findSellBitcoinsOnlice(locationInfo.countryName, null, $("#sell-bitcoins"));
-    findBuyBitcoinsOnlice(locationInfo.countryName, null, $("#buy-bitcoins"));
+    findSellBitcoinsOnline(locationInfo.countryName, null, $("#sell-bitcoins"));
+    findBuyBitcoinsOnline(locationInfo.countryName, null, $("#buy-bitcoins"));
   } else {
     $('#main-result').hide();
   }
@@ -459,11 +459,11 @@ function refresh_homepage() {
     updateInfo(gtu, false);
   });
 
-  $('.user-detalis').unbind('click');
-  $('.user-detalis').bind('click', function() {
+  $('.user-details').unbind('click');
+  $('.user-details').bind('click', function() {
     var gtu = $(this).attr('href');
     $('.page').hide();
-    $('#info-user-detalis').show();
+    $('#info-user-details').show();
     $('#uid-un').html(gtu);
 
     localbitcoins.account(gtu, function(data) {
@@ -489,23 +489,23 @@ function initLocalbitcoins(tn) {
   }
 
   localbitcoins.payment_methods(function(data) {
-    var pm = $('#paymend-method');
+    var pm = $('#payment-method');
 
     $.each(data.data.methods, function(key, val) {
       pm.append('<option value="' + val.code + '">' + val.name + '</option>');
-      POVIDER_ONLINE[val.code] = [val.name, key];
+      PROVIDER_ONLINE[val.code] = [val.name, key];
     });
   });
 
   wait(false);
 
   $('.more-btn').click(function() {
-    $(this).hide().parents('.continer-section').find('.list-continer').removeClass('short-list');
+    $(this).hide().parents('.container-section').find('.list-container').removeClass('short-list');
     $(this).parent().children().eq(1).show();
   });
 
   $('.less-btn').click(function() {
-    $(this).hide().parents('.continer-section').find('.list-continer').addClass('short-list');
+    $(this).hide().parents('.container-section').find('.list-container').addClass('short-list');
     $(this).parent().children().eq(0).show();
   });
 
@@ -515,7 +515,7 @@ function initLocalbitcoins(tn) {
     refresh_homepage();
   });
 
-  $('#exchcenge-select').change(function() {
+  $('#exchange-select').change(function() {
     updateGraph($(this).val());
   });
 
@@ -524,12 +524,12 @@ function initLocalbitcoins(tn) {
     $('#exchange-page').show();
 
     localbitcoins.ticker(function(data) {
-      var pm = $('#exchcenge-select');
+      var pm = $('#exchange-select');
       var iCounter = 0;
 
       $.each(data, function(key, val) {
         pm.append('<option value="' + iCounter + '">' + key + '</option>');
-        EXCHENGE_BTN[iCounter++] = [key, val];
+        EXCHANGE_BTN[iCounter++] = [key, val];
       });
 
       updateGraph(0);
@@ -578,16 +578,16 @@ function initLocalbitcoins(tn) {
     var buy_cach = false;
 
     var country_name = $('#search-country').val();
-    var payment_method = $('#paymend-method').parent().val();
+    var payment_method = $('#payment-method').parent().val();
 
     if (payment_method != '') {
-      payment_method = POVIDER_ONLINE[payment_method][1];
+      payment_method = PROVIDER_ONLINE[payment_method][1];
     }
             
     if (!buy_boolean) {
-      findSellBitcoinsOnlice(country_name,payment_method, $("#result-sell-bitcoins"));
+      findSellBitcoinsOnline(country_name,payment_method, $("#result-sell-bitcoins"));
     } else {
-      findBuyBitcoinsOnlice(country_name,payment_method, $("#result-buy-bitcoins"));
+      findBuyBitcoinsOnline(country_name,payment_method, $("#result-buy-bitcoins"));
     }
   });
 }
