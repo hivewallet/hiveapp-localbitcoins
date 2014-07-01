@@ -91,7 +91,7 @@ var COUNTRY_NAMES = [
   "Aland Islands","Guernsey","Isle of Man","Jersey","Saint Barthelemy","Saint Martin"
 ];
 
-var logged = false;
+var loggedIn = false;
 
 var locationInfo = {
   countryCode: 'pl'
@@ -488,6 +488,14 @@ function initLocalbitcoins(tn) {
     $('#main-result').hide();
   }
 
+  var tokenPart = location.hash.match(new RegExp('access_token=(\\w+)'));
+  if (tokenPart) {
+    loggedIn = true;
+    tokens.accessToken = tokenPart[1];
+    $('#login-btn').html('account');
+    refresh_account();
+  }
+
   localbitcoins.payment_methods(function(data) {
     var pm = $('#payment-method');
 
@@ -537,40 +545,12 @@ function initLocalbitcoins(tn) {
   });
 
   $('#login-btn').click(function() {
-    $('.alert').hide();
-
-    if (logged) {
+    if (loggedIn) {
       refresh_account();
       return false;
     } else {
-      $('.page').hide();
-      $('#login-page').show();
+      localbitcoins.login();
     }
-  });
-
-  $('#auth-btn').click(function() {
-    $('.alert').hide();
-
-    var success = function(data) {
-      if (data.error) {
-        $("#login-error").show().html('Invalid username or password');
-      } else {
-        logged = true;
-        $('#login-btn').html('account');
-        refresh_account();
-      }
-
-      wait(false);
-    };
-
-    var error = function(xhr, ajaxOptions, thrownError) {
-      $("#login-error").show().html('Invalid username or password');
-      wait(false);
-    };
-
-    wait(true);
-
-    localbitcoins.login($('#login-name').val(), $('#login-password').val(), success, error);
   });
 
   $('#search-btn').click(function() {

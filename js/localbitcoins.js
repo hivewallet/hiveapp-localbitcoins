@@ -4,14 +4,8 @@ var site = {
 };
 
 var tokens = {
-  access_token: "268403ff995ba2448a9b5e758bacb09de6d8f877",
-  expires_in: "31535999",
-  refresh_token: "a049036c4d7aaece1b7fd197143e0428d2d2ce1f",
-  scope: "read"
+  clientID: "8d56ad847955f100fe67"
 };
-
-var clientID = "bf4786cc3d61c977a00d",
-clientSecret = "278240b45e3ff14a7d972b3055224a5f67feaed7";
 
 var apiPaths = {
   payment_methods: '/api/payment_methods/',
@@ -30,7 +24,7 @@ LocalBitcoins = function() {};
 
 LocalBitcoins.prototype.request_post = function(path, extra_data, success_callback) {
   var form = extra_data;
-  form.access_token = tokens.access_token;
+  form.access_token = tokens.accessToken;
 
   post.call(this, path, form, function(data) {
     success_callback(data, true);
@@ -55,18 +49,10 @@ LocalBitcoins.prototype.request_get = function(path, extra_data, success_callbac
 };
 
 LocalBitcoins.prototype.login = function(username, password, success, error) {
-  var data = {
-    client_id: clientID,
-    client_secret: clientSecret,
-    grant_type: "password",
-    username: username,
-    password: password
-  };
-
-  post.call(this, "/oauth2/access_token/", data, function(data){
-    tokens.access_token = data.access_token
-    success(data)
-  }, error);
+  window.location = 'https://localbitcoins.com/oauth2/authorize/' +
+    '?response_type=token' +
+    '&client_id=' + tokens.clientID +
+    '&redirect_uri=' + encodeURIComponent(location.origin + location.pathname);
 };
 
 LocalBitcoins.prototype.trades = function(currency, callback) {
