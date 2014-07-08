@@ -566,6 +566,15 @@ function initLocalbitcoins(tn) {
     }
   });
 
+  $('#logout-btn').click(function() {
+    loggedIn = false;
+    $('#login-btn').html('login');
+    $.removeCookie(AUTH_COOKIE);
+
+    $('.page').hide();
+    $('#main-page').show();
+  });
+
   $('#search-btn').click(function() {
     var buy_boolean = $('#id-whattodo').prop('checked');
     var buy_cach = false;

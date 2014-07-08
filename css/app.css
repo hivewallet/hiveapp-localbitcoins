@@ -55,11 +55,13 @@
   width:25%;
 }
 
-
-
 #header > div:last-child
 {
   width:25%;
+}
+
+#footer {
+  text-align: center;
 }
 
 #home-subtitle,.rtp-title
@@ -199,7 +201,7 @@
   font-weight:bold;
 }
 
-.list-container button,.container-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn,#home-btn
+.list-container button,.container-section > div:last-child > button,#search button,#login-btn,#auth-btn,#logout-btn,#exchange-btn,#home-btn
 {
   font-weight:bold;
   color:#fff; 
@@ -213,7 +215,7 @@
   background-color:#1c6ebf;
 }
 
-.container-section > div:last-child > button,#search,#login-form,#login-btn
+.container-section > div:last-child > button,#search,#login-form,#login-btn,#logout-btn
 {
   background-color:#f58220;
 }
@@ -229,7 +231,7 @@
 }
 
 
-.list-container button,.container-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn
+.list-container button,.container-section > div:last-child > button,#search button,#login-btn,#auth-btn,#exchange-btn,#logout-btn
 {
   padding:3px 30px;
 }
