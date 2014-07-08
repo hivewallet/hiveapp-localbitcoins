@@ -11,6 +11,7 @@ jQuery(document).ready(function() {
   initLocalization();
 });
 
+var AUTH_COOKIE = 'localbitcoins.access_token';
 var PROVIDER_ONLINE = [];
 var EXCHANGE_BTN = [];
 var HOMEPAGE_DATA = [];
@@ -481,6 +482,24 @@ function refresh_homepage() {
   wait(false);
 }
 
+function checkAuthentication() {
+  var tokenPart = location.hash.match(new RegExp('access_token=(\\w+)'));
+  var cookie;
+
+  if (tokenPart) {
+    tokens.accessToken = tokenPart[1];
+    $.cookie(AUTH_COOKIE, tokens.accessToken, { expires: 30 });
+  } else if (cookie = $.cookie(AUTH_COOKIE)) {
+    tokens.accessToken = cookie;
+  }
+
+  if (tokens.accessToken) {
+    loggedIn = true;
+    $('#login-btn').html('account');
+    refresh_account();
+  }
+}
+
 function initLocalbitcoins(tn) {
   if (tn) {
     refresh_homepage();
@@ -488,13 +507,7 @@ function initLocalbitcoins(tn) {
     $('#main-result').hide();
   }
 
-  var tokenPart = location.hash.match(new RegExp('access_token=(\\w+)'));
-  if (tokenPart) {
-    loggedIn = true;
-    tokens.accessToken = tokenPart[1];
-    $('#login-btn').html('account');
-    refresh_account();
-  }
+  checkAuthentication();
 
   localbitcoins.payment_methods(function(data) {
     var pm = $('#payment-method');
