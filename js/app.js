@@ -207,7 +207,9 @@ function updateGraph(value) {
 
   $('#defaults-graph').tufteBar({
     data: commonTestData,
-    barLabel:  function(i) { return this[0] },
+    barLabel:  function(i) {
+      return $.tufteBar.formatNumber(Math.round(this[0] * 100) / 100);
+    },
     axisLabel: function(i) { return this[1].label },
     barWidth:  function(i) { return 0.5 + (i % 2) * 0.2 },
     color:     function(i) { return this[1].color }
